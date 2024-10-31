@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:pos/view/branch/customer/customer_view.dart';
 import 'package:pos/view/branch/dashboard/dashboard_view.dart';
 import 'package:pos/view/branch/expense/expense_view.dart';
+import 'package:pos/view/branch/installment/company_ledger_view.dart';
+import 'package:pos/view/branch/installment/customer_ledger.dart';
+import 'package:pos/view/branch/product/stock_inventory_view.dart';
 import 'package:pos/view/branch/supplier/supplier_view.dart';
 
 import '../../res/color/app_color.dart';
@@ -79,16 +82,22 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 child: Center(child: Icon(CupertinoIcons.cube_box,color: Colors.white,size: 16,)),
               ),
               title: const Text("Product"),
-              children: const [
+              children: [
                 ListTile(
                   leading: Icon(CupertinoIcons.square_list,color: AppColor.primaryColor,),
                   title: Text("Category"),
                   trailing: Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
+                  onTap: (){
+
+                  },
                 ),
                 ListTile(
                   leading: Icon(CupertinoIcons.archivebox,color: AppColor.primaryColor,),
                   title: Text("Stock Inventory"),
                   trailing: Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => StockInventoryView()));
+                  },
                 ),
               ],
             ),
@@ -175,16 +184,22 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 child: const Center(child: Icon(CupertinoIcons.creditcard,color: Colors.white,size: 16,)),
               ),
               title: Text("Installment"),
-              children: const [
+              children: [
                 ListTile(
                   leading: Icon(CupertinoIcons.person_alt,color: AppColor.primaryColor,),
                   title: Text("Customer Installment"),
                   trailing: Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const CustomerLedgerView()));
+                  },
                 ),
                 ListTile(
                   leading: Icon(CupertinoIcons.group,color: AppColor.primaryColor,),
                   title: Text("Supplier Installment"),
                   trailing: Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const CompanyLedgerView()));
+                  },
                 ),
               ],
             ),
