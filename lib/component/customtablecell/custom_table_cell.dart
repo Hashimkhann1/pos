@@ -17,7 +17,7 @@ class HeaderCustomTableCell extends StatelessWidget {
   Widget build(BuildContext context) {
     return TableCell(
       child: Container(
-        height: 40,
+        height: 30,
         child: Center(
           child: Text(
             title,
@@ -50,7 +50,7 @@ class CustomTableCell extends StatelessWidget {
     return TableCell(
       verticalAlignment: TableCellVerticalAlignment.middle,
       child: Container(
-        height: 40,
+        height: 30,
         child: Center(
           child: Text(
             title,
