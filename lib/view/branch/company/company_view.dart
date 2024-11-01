@@ -16,7 +16,7 @@ class _SupplierViewState extends State<SupplierView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Supplier"),
+        title: const Text("Company"),
       ),
       drawer: DrawerWidget(),
       body: Padding(
@@ -53,8 +53,8 @@ class _SupplierViewState extends State<SupplierView> {
                   ),
                   children: [
                     HeaderCustomTableCell(title: "#"),
+                    HeaderCustomTableCell(title: "Company Name"),
                     HeaderCustomTableCell(title: "Supplier Name"),
-                    HeaderCustomTableCell(title: "Company"),
                     HeaderCustomTableCell(title: "Phone No"),
                     HeaderCustomTableCell(title: "CNIC"),
                     HeaderCustomTableCell(title: "Address"),
@@ -102,6 +102,100 @@ class _SupplierViewState extends State<SupplierView> {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: (){
+          showDialog(
+            context: context,
+            builder: (context){
+              return AlertDialog(
+                title: Container(
+                  height: 30,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: AppColor.primaryColor,
+                  ),
+                  child: Center(child: Text("Company")),
+                ),
+                content: const Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      children: [
+                        AppTextField(
+                          hintText: "Company Name",
+                        ),
+                        SizedBox(width: 10,),
+                        AppTextField(
+                          hintText: "Supplier Name",
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10,),
+                    Row(
+                      children: [
+                        AppTextField(
+                          hintText: "Email",
+                        ),
+                        SizedBox(width: 10,),
+                        AppTextField(
+                          hintText: "Phone No",
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10,),
+                    Row(
+                      children: [
+                        AppTextField(
+                          hintText: "Address",
+                        ),
+                        SizedBox(width: 10,),
+                        AppTextField(
+                          hintText: "Company Type",
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10,),
+                    Row(
+                      children: [
+                        AppTextField(
+                          hintText: "Description",
+                        ),
+                        SizedBox(width: 10,),
+                        AppTextField(
+                          hintText: "Balance",
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                actions: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      ElevatedButton(
+                        onPressed: (){
+
+                        },
+                        child: Text("Cancel"),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      ElevatedButton(
+                        onPressed: (){
+
+                        },
+                        child: Text("Save"),
+                      )
+                    ],
+                  )
+                ],
+              );
+            },
+          );
+        },
+        label: Text("Add Customer"),
       ),
     );
   }

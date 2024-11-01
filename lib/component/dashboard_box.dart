@@ -43,8 +43,8 @@ class DashboardBox extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title,style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
-                  Text(subtitle,style: TextStyle(fontSize: 18,fontWeight: FontWeight.w400),),
+                  Flexible(child: Text(title,style: TextStyle(fontSize: 14,fontWeight: FontWeight.w600),)),
+                  Flexible(child: Text(subtitle,style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400),)),
                 ],
               )
             ],

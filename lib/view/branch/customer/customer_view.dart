@@ -104,6 +104,100 @@ class _CustomerViewState extends State<CustomerView> {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: (){
+          showDialog(
+            context: context,
+            builder: (context){
+              return AlertDialog(
+                title: Container(
+                  height: 30,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: AppColor.primaryColor,
+                  ),
+                  child: Center(child: Text("Customer")),
+                ),
+                content: const Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      children: [
+                        AppTextField(
+                          hintText: "Customer Name",
+                        ),
+                        SizedBox(width: 10,),
+                        AppTextField(
+                          hintText: "Phone No",
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10,),
+                    Row(
+                      children: [
+                        AppTextField(
+                          hintText: "Email",
+                        ),
+                        SizedBox(width: 10,),
+                        AppTextField(
+                          hintText: "CNIC",
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10,),
+                    Row(
+                      children: [
+                        AppTextField(
+                          hintText: "Address",
+                        ),
+                        SizedBox(width: 10,),
+                        AppTextField(
+                          hintText: "Work Type",
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10,),
+                    Row(
+                      children: [
+                        AppTextField(
+                          hintText: "Description",
+                        ),
+                        SizedBox(width: 10,),
+                        AppTextField(
+                          hintText: "Balance",
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                actions: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      ElevatedButton(
+                        onPressed: (){
+
+                        },
+                        child: Text("Cancel"),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      ElevatedButton(
+                        onPressed: (){
+
+                        },
+                        child: Text("Save"),
+                      )
+                    ],
+                  )
+                ],
+              );
+            },
+          );
+        },
+        label: Text("Add Customer"),
+      ),
     );
   }
 }

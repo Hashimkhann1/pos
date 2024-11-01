@@ -6,9 +6,8 @@ import 'package:pos/view/branch/expense/expense_view.dart';
 import 'package:pos/view/branch/installment/company_ledger_view.dart';
 import 'package:pos/view/branch/installment/customer_ledger.dart';
 import 'package:pos/view/branch/product/stock_inventory_view.dart';
-import 'package:pos/view/branch/supplier/supplier_view.dart';
-
 import '../../res/color/app_color.dart';
+import '../../view/branch/company/company_view.dart';
 
 class DrawerWidget extends StatefulWidget {
   const DrawerWidget({super.key});
@@ -151,7 +150,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 ),
                 child: Center(child: Icon(CupertinoIcons.group,color: Colors.white,size: 16,)),
               ),
-              title: Text("Supplier"),
+              title: Text("Company"),
               trailing: Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
               onTap: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => const SupplierView()));
@@ -195,7 +194,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 ),
                 ListTile(
                   leading: Icon(CupertinoIcons.group,color: AppColor.primaryColor,),
-                  title: Text("Supplier Installment"),
+                  title: Text("Company Installment"),
                   trailing: Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
                   onTap: (){
                     Navigator.push(context, MaterialPageRoute(builder: (context) => const CompanyLedgerView()));
