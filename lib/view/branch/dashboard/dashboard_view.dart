@@ -70,7 +70,7 @@ class _DashboardViewState extends State<DashboardView> {
                           spots: List.generate(monthlySalesData.length, (index) {
                             return FlSpot(index.toDouble(), monthlySalesData[index]);
                           }),
-                          isCurved: false,
+                          isCurved: true,
                           color: AppColor.primaryColor,
                           barWidth: 4,
 
