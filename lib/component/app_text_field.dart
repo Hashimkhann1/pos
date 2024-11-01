@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:pos/res/color/app_color.dart';
 
 class AppTextField extends StatelessWidget {
 
@@ -31,16 +32,18 @@ class AppTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       width: 300,
+      height: 35,
       child: TextFormField(
         controller: controller,
         validator: validator,
         keyboardType: keyboardType,
-        cursorHeight: 15,
+        cursorHeight: 12,
+        cursorColor: AppColor.primaryColor,
         style: const TextStyle(
           fontWeight: FontWeight.w700,
-          fontSize: 16,
+          fontSize: 12,
         ),
         decoration: InputDecoration(
           hintText: hintText,
