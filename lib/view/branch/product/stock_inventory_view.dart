@@ -20,9 +20,9 @@ class _StockInventoryViewState extends State<StockInventoryView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Product Inventory"),
+        title: const Text("Stock Inventory"),
       ),
-      drawer: DrawerWidget(),
+      drawer:  const DrawerWidget(),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -94,7 +94,7 @@ class _StockInventoryViewState extends State<StockInventoryView> {
                         decoration: BoxDecoration(
                           color: index.isOdd ? Colors.grey.shade100 : AppColor.white,
                         ),
-                        children: [
+                        children: const [
                           CustomTableCell(title: "#"),
                           CustomTableCell(title: "Barcode"),
                           CustomTableCell(title: "Product"),
@@ -102,7 +102,7 @@ class _StockInventoryViewState extends State<StockInventoryView> {
                           CustomTableCell(title: "Company"),
                           CustomTableCell(title: "Purchase Price"),
                           CustomTableCell(title: "Sale Price"),
-                          CustomTableCell(title: "Quantity"),
+                          CustomTableCell(title: "Stock"),
                         ],
                       ),
                     ],
@@ -112,6 +112,124 @@ class _StockInventoryViewState extends State<StockInventoryView> {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: (){
+          showDialog(
+            context: context,
+            builder: (context){
+              return AlertDialog(
+                title: Container(
+                  height: 30,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: AppColor.primaryColor,
+                  ),
+                  child: Center(child: Text("Stock Inventory")),
+                ),
+                content: const Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      children: [
+                        AppTextField(
+                          hintText: "Barcode",
+                        ),
+                        SizedBox(width: 10,),
+                        AppTextField(
+                          hintText: "Product Name",
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10,),
+                    Row(
+                      children: [
+                        AppTextField(
+                          hintText: "Purchase Price",
+                        ),
+                        SizedBox(width: 10,),
+                        AppTextField(
+                          hintText: "Sale Price",
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10,),
+                    Row(
+                      children: [
+                        AppTextField(
+                          hintText: "Whole Sale",
+                        ),
+                        SizedBox(width: 10,),
+                        AppTextField(
+                          hintText: "Discount",
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10,),
+                    Row(
+                      children: [
+                        AppTextField(
+                          hintText: "Tax",
+                        ),
+                        SizedBox(width: 10,),
+                        AppTextField(
+                          hintText: "Stock",
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10,),
+                    Row(
+                      children: [
+                        AppTextField(
+                          hintText: "Product Type",
+                        ),
+                        SizedBox(width: 10,),
+                        AppTextField(
+                          hintText: "Company",
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10,),
+                    Row(
+                      children: [
+                        AppTextField(
+                          hintText: "Purchase Date",
+                        ),
+                        SizedBox(width: 10,),
+                        AppTextField(
+                          hintText: "Expiry Date",
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                actions: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      ElevatedButton(
+                        onPressed: (){
+
+                        },
+                        child: Text("Cancel"),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      ElevatedButton(
+                        onPressed: (){
+
+                        },
+                        child: Text("Save"),
+                      )
+                    ],
+                  )
+                ],
+              );
+            },
+          );
+        },
+        label: Text("Add Product"),
       ),
     );
   }
