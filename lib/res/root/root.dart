@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pos/res/theme/light_theme.dart';
-import '../../view/branch/dashboard/dashboard_view.dart';
+import 'package:pos/view/branch/product/stock_inventory_view.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
         title: 'Point of Sale',
         debugShowCheckedModeBanner: false,
         theme: LightTheme.lightTheme,
-        home: DashboardView(),
+        home: const StockInventoryView(),
     );
   }
 }
