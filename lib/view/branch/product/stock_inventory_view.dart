@@ -27,11 +27,11 @@ class _StockInventoryViewState extends State<StockInventoryView> {
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Flexible(
-                  child: const AppTextField(
+                  child: AppTextField(
                     hintText: "Search Product",
                     prefixIcon: Icon(Icons.search),
                   ),
@@ -125,7 +125,7 @@ class _StockInventoryViewState extends State<StockInventoryView> {
                     borderRadius: BorderRadius.circular(5),
                     color: AppColor.primaryColor,
                   ),
-                  child: Center(child: Text("Stock Inventory")),
+                  child: const Center(child: Text("Stock Inventory")),
                 ),
                 content: const Column(
                   mainAxisSize: MainAxisSize.min,
@@ -211,16 +211,16 @@ class _StockInventoryViewState extends State<StockInventoryView> {
                         onPressed: (){
 
                         },
-                        child: Text("Cancel"),
+                        child: const Text("Cancel"),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       ElevatedButton(
                         onPressed: (){
 
                         },
-                        child: Text("Save"),
+                        child: const Text("Save"),
                       )
                     ],
                   )
@@ -229,7 +229,8 @@ class _StockInventoryViewState extends State<StockInventoryView> {
             },
           );
         },
-        label: Text("Add Product"),
+
+        label: const Text("Add Product"),
       ),
     );
   }
