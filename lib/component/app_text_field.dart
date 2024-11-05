@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pos/res/color/app_color.dart';
@@ -17,6 +16,8 @@ class AppTextField extends StatelessWidget {
     this.obscureText = false,
     this.inputFormatters,
     this.enable = true,
+    this.width = 300,
+    this.height = 35,
     super.key});
 
 
@@ -31,14 +32,16 @@ class AppTextField extends StatelessWidget {
   final bool obscureText;
   final bool enable;
   final List<TextInputFormatter>? inputFormatters;
+  final double width;
+  final double height;
 
 
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 300,
-      height: 35,
+      width: width,
+      height: height,
       child: TextFormField(
         controller: controller,
         validator: validator,
