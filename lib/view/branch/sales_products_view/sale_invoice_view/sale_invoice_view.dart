@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:pos/component/my_text.dart';
 import 'package:pos/res/color/app_color.dart';
 
-class SaleInviceView extends StatelessWidget {
-  const SaleInviceView({super.key});
+class SaleInvoiceView extends StatelessWidget {
+  const SaleInvoiceView({super.key});
 
   @override
   Widget build(BuildContext context) {
