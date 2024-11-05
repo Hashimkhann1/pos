@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pos/res/theme/light_theme.dart';
-
-import '../../view/branch/product/stock_inventory_view.dart';
+import 'package:pos/view/branch/sales_products_view/all_products_and_total_view/all_products_and_total_view.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -12,8 +11,8 @@ class MyApp extends StatelessWidget {
         title: 'Point of Sale',
         debugShowCheckedModeBanner: false,
         theme: LightTheme.lightTheme,
-        home: const StockInventoryView(),
-        // home: const AllProductsView(),
+        // home: const StockInventoryView(),
+        home: const AllProductsView(),
     );
   }
 }
