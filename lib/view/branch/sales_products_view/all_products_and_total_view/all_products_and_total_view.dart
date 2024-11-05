@@ -14,10 +14,10 @@ class AllProductsView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Sale Product"),
+        title: const Text("Sale Product"),
       ),
-      drawer: DrawerWidget(),
-      body: Row(
+      drawer: const DrawerWidget(),
+      body: const Row(
         children: [
 
           /// All product view

@@ -31,14 +31,16 @@ class SaleInviceView extends StatelessWidget {
             ],
           ),
 
+          const SizedBox(height: 10,),
+
           /// sell button
           TextButton(
             style: TextButton.styleFrom(
-              padding: EdgeInsets.symmetric(horizontal: 40,vertical: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 40,vertical: 16),
                 backgroundColor: AppColor.black.withOpacity(0.5)
             ),
               onPressed: (){},
-              child: MyText(title: "Sell",fontSize: 12,fontWeight: FontWeight.bold,color: AppColor.white,)
+              child: const MyText(title: "Sell",fontSize: 12,fontWeight: FontWeight.bold,color: AppColor.white,)
           )
         ],
       ),
