@@ -16,7 +16,7 @@ class SalesProductsView extends StatelessWidget {
     return Container(
         width: width < 1300 ? width * 0.45 : width * 0.42,
         decoration: BoxDecoration(color: AppColor.white,border: Border.all(color: AppColor.black.withOpacity(0.4))),
-        margin: EdgeInsets.only(left: 10,top: 10,bottom: 10),
+        margin: const EdgeInsets.only(left: 10,top: 10,bottom: 10),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 7, vertical: height * 0.01),
           child: Column(
