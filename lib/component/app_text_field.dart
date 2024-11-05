@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:pos/res/color/app_color.dart';
 
 class AppTextField extends StatelessWidget {
@@ -14,6 +15,7 @@ class AppTextField extends StatelessWidget {
     this.onChanged,
     this.onFieldSubmitted,
     this.obscureText = false,
+    this.inputFormatters,
     this.enable = true,
     super.key});
 
@@ -28,6 +30,8 @@ class AppTextField extends StatelessWidget {
   final void Function(String)? onFieldSubmitted;
   final bool obscureText;
   final bool enable;
+  final List<TextInputFormatter>? inputFormatters;
+
 
 
   @override
@@ -39,6 +43,7 @@ class AppTextField extends StatelessWidget {
         controller: controller,
         validator: validator,
         keyboardType: keyboardType,
+        inputFormatters: inputFormatters,
         cursorHeight: 12,
         cursorColor: AppColor.primaryColor,
         style: const TextStyle(

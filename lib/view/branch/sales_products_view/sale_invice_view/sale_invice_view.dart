@@ -18,17 +18,16 @@ class SaleInviceView extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              MyText(title: "Total Selected Products",fontSize: 20,fontWeight: FontWeight.bold,color: AppColor.black.withOpacity(0.5),),
-              MyText(title: "10",fontSize: 30,fontWeight: FontWeight.bold,color: AppColor.black.withOpacity(0.5))
+              MyText(title: "Total Products",fontSize: 18,fontWeight: FontWeight.bold,color: AppColor.black.withOpacity(0.5),),
+              MyText(title: "10",fontSize: 18,fontWeight: FontWeight.bold,color: AppColor.black.withOpacity(0.5))
             ],
           ),
-
           /// Total Selected Products price
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              MyText(title: "Total Price",fontSize: 20,fontWeight: FontWeight.bold,color: AppColor.black.withOpacity(0.5),),
-              MyText(title: "30000",fontSize: 30,fontWeight: FontWeight.bold,color: AppColor.black.withOpacity(0.5))
+              MyText(title: "Total Price",fontSize: 18,fontWeight: FontWeight.bold,color: AppColor.black.withOpacity(0.5),),
+              MyText(title: "30000",fontSize: 18,fontWeight: FontWeight.bold,color: AppColor.black.withOpacity(0.5))
             ],
           ),
 
@@ -39,7 +38,7 @@ class SaleInviceView extends StatelessWidget {
                 backgroundColor: AppColor.black.withOpacity(0.5)
             ),
               onPressed: (){},
-              child: MyText(title: "Sell",fontSize: 20,fontWeight: FontWeight.bold,color: AppColor.white,)
+              child: MyText(title: "Sell",fontSize: 12,fontWeight: FontWeight.bold,color: AppColor.white,)
           )
         ],
       ),

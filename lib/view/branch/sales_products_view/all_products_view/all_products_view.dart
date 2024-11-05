@@ -1,8 +1,7 @@
-
-
 import 'package:flutter/material.dart';
-import 'package:pos/view/sales_products_view/sales_products_view.dart';
-import 'package:pos/view/sales_products_view/selected_product_for_sale_view/selected_product_for_sale_view.dart';
+import 'package:pos/component/drawer/drawer_widget.dart';
+import '../sales_products_view.dart';
+import '../selected_product_for_sale_view/selected_product_for_sale_view.dart';
 
 class AllProductsView extends StatelessWidget {
   const AllProductsView({super.key});
@@ -13,7 +12,11 @@ class AllProductsView extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
 
-    return const Scaffold(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Sale Product"),
+      ),
+      drawer: DrawerWidget(),
       body: Row(
         children: [
 

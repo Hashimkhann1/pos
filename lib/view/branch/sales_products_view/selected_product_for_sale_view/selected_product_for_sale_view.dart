@@ -1,10 +1,10 @@
-
-
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:pos/component/app_text_field.dart';
 import 'package:pos/component/my_text.dart';
 import 'package:pos/res/color/app_color.dart';
-import 'package:pos/view/sales_products_view/sale_invice_view/sale_invice_view.dart';
+
+import '../sale_invice_view/sale_invice_view.dart';
 
 class SelectedProductForSaleView extends StatelessWidget {
   const SelectedProductForSaleView({super.key});
@@ -48,7 +48,26 @@ class SelectedProductForSaleView extends StatelessWidget {
                     ),
                     child: const MyText(
                       title: "Product Name",
-                      fontSize: 17,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+
+                  /// price
+                  Container(
+                    alignment: Alignment.center,
+                    width: width * 0.08,
+                    height: height * 0.03,
+                    decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(
+                              color: AppColor.black.withOpacity(0.4)),
+                          left: BorderSide(
+                              color: AppColor.black.withOpacity(0.4)),
+                        )),
+                    child: const MyText(
+                      title: "Price",
+                      fontSize: 14,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -72,25 +91,6 @@ class SelectedProductForSaleView extends StatelessWidget {
                     ),
                   ),
 
-                  /// price
-                  Container(
-                    alignment: Alignment.center,
-                    width: width * 0.08,
-                    height: height * 0.03,
-                    decoration: BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(
-                              color: AppColor.black.withOpacity(0.4)),
-                          left: BorderSide(
-                              color: AppColor.black.withOpacity(0.4)),
-                        )),
-                    child: const MyText(
-                      title: "Price",
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-
                   /// Discount
                   Container(
                     alignment: Alignment.center,
@@ -105,7 +105,7 @@ class SelectedProductForSaleView extends StatelessWidget {
                         )),
                     child: const MyText(
                       title: "Discount",
-                      fontSize: 17,
+                      fontSize: 14,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -126,7 +126,7 @@ class SelectedProductForSaleView extends StatelessWidget {
                         )),
                     child: const MyText(
                       title: "Total",
-                      fontSize: 17,
+                      fontSize: 14,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -143,7 +143,7 @@ class SelectedProductForSaleView extends StatelessWidget {
                           )),
                       child: const MyText(
                         title: "Del",
-                        fontSize: 17,
+                        fontSize: 14,
                         fontWeight: FontWeight.bold,
                       )),
                 ],
@@ -152,7 +152,7 @@ class SelectedProductForSaleView extends StatelessWidget {
               /// selected products
               Expanded(
                   child: ListView.builder(
-                    itemCount: 20,
+                    itemCount: 10,
                       itemBuilder: (context , index) {
                         return Row(
                           children: [
@@ -168,26 +168,8 @@ class SelectedProductForSaleView extends StatelessWidget {
                               ),
                               child: MyText(
                                 title: "Product Na",
-                                fontSize: 16,
+                                fontSize: 14,
                                 fontWeight: FontWeight.w500,
-                              ),
-                            ),
-
-                            /// qty
-                            Expanded(
-                              child: Container(
-                                alignment: Alignment.center,
-                                height: height * 0.04,
-                                child: AppTextField(
-                                  // controller: qtyController,
-                                  keyboardType: TextInputType.number,
-                                  // inputFormatters: [
-                                  //   FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
-                                  // ],
-                                  hintText: "1",
-                                  // borderRadius: 0,
-                                  // borderSide: BorderSide(color: AppColor.black.withOpacity(0.4)),
-                                ),
                               ),
                             ),
 
@@ -206,6 +188,29 @@ class SelectedProductForSaleView extends StatelessWidget {
                                 title: "Sale P",
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
+                              ),
+                            ),
+
+
+                            /// qty
+                            Expanded(
+                              child: Container(
+                                alignment: Alignment.center,
+                                height: height * 0.04,
+                                child: AppTextField(
+                                  // controller: qtyController,
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: <TextInputFormatter>[
+                                    FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
+                                  ],
+                                  // inputFormatters: [
+                                  //   FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
+                                  // ],
+                                  hintText: "1",
+
+                                  // borderRadius: 0,
+                                  // borderSide: BorderSide(color: AppColor.black.withOpacity(0.4)),
+                                ),
                               ),
                             ),
 

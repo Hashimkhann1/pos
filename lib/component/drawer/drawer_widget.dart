@@ -8,6 +8,7 @@ import 'package:pos/view/branch/installment/customer_ledger.dart';
 import 'package:pos/view/branch/product/stock_inventory_view.dart';
 import '../../res/color/app_color.dart';
 import '../../view/branch/company/company_view.dart';
+import '../../view/branch/sales_products_view/all_products_view/all_products_view.dart';
 
 class DrawerWidget extends StatefulWidget {
   const DrawerWidget({super.key});
@@ -57,11 +58,14 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 child: Center(child: Icon(CupertinoIcons.doc_plaintext,color: Colors.white,size: 16,)),
               ),
               title: const Text("Sale Invoice"),
-              children: const [
+              children: [
                 ListTile(
                   leading: Icon(CupertinoIcons.cart_badge_plus,color: AppColor.primaryColor,),
                   title: Text("Add Sale"),
                   trailing: Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => AllProductsView()));
+                  },
                 ),
                 ListTile(
                   leading: Icon(CupertinoIcons.arrow_turn_up_left,color: AppColor.primaryColor,),

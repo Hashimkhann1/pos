@@ -24,12 +24,11 @@ class SalesProductsView extends StatelessWidget {
                const Row(
                 children: [
                   Expanded(
-                      flex: 7,
+                      flex: 3,
                       child: AppTextField(
                         hintText: "Search products",
                         // borderRadius: 0,
                       )),
-
                 ],
               ),
               SizedBox(height: height * 0.02,),
@@ -44,31 +43,10 @@ class SalesProductsView extends StatelessWidget {
                       width: width < 1160 ? width * 0.54 : width,
                       child: DataTable(
                         columns: [
-                          DataColumn(
-                              label: MyText(
-                                title: '#',
-                                fontWeight: FontWeight.w600,
-                                fontSize: 18,
-                                color: AppColor.black.withOpacity(0.8),
-                              )),DataColumn(
-                              label: MyText(
-                                title: 'Product Name',
-                                fontWeight: FontWeight.w600,
-                                fontSize: 17,
-                                color: AppColor.black.withOpacity(0.8),
-                              )),
-                          DataColumn(
-                              label: MyText(
-                                  title: 'In Stock',
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 17,
-                                  color: AppColor.black.withOpacity(0.8))),
-                          DataColumn(
-                              label: MyText(
-                                  title: 'Unit Price',
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 17,
-                                  color: AppColor.black.withOpacity(0.8))),
+                          DataColumn(label: MyText(title: '#', fontWeight: FontWeight.w600, fontSize: 14, color: AppColor.black.withOpacity(0.8),)),
+                          DataColumn(label: MyText(title: 'Product Name', fontWeight: FontWeight.w600, fontSize: 14, color: AppColor.black.withOpacity(0.8),)),
+                          DataColumn(label: MyText(title: 'In Stock', fontWeight: FontWeight.w600, fontSize: 14, color: AppColor.black.withOpacity(0.8))),
+                          DataColumn(label: MyText(title: 'Unit Price', fontWeight: FontWeight.w600, fontSize: 14, color: AppColor.black.withOpacity(0.8))),
                         ],
                         rows: List.generate(40, (index) {
                           return DataRow(
@@ -89,19 +67,9 @@ class SalesProductsView extends StatelessWidget {
 
                                 // context.read<SelectedProductForSellBloc>().add(AddSelectedProductToSellSection(productDetail: proData));
                               }, cells: [
-                            DataCell(
-                              MyText(title: index.toString()),
-                            ),const DataCell(
-                              MyText(title: "Product Name"),
-                            ),
-                            DataCell(
-                              // MyText(title: state.allProductsData[index].productQuantity.toString()),
-                              MyText(title: "${2 * index}"),
-                            ),
-                            DataCell(
-                              // MyText(title: state.allProductsData[index].salesPrice.toString()),
-                              MyText(title: "${index == 0 ? 40 : 6 * index}"),
-                            ),
+                            DataCell(MyText(title: index.toString()),),const DataCell(MyText(title: "Product Name"),),
+                            DataCell(MyText(title: "${2 * index}"),),
+                            DataCell(MyText(title: "${index == 0 ? 40 : 6 * index}"),),
                           ]);
                         }),
                         columnSpacing: 10.0,
@@ -114,7 +82,8 @@ class SalesProductsView extends StatelessWidget {
                         headingRowHeight: 36.0,
                         showCheckboxColumn: false,
                         border: TableBorder.all(
-                            color: AppColor.black.withOpacity(0.3)),
+                          color: AppColor.black.withOpacity(0.3),
+                        ),
                       ),
                     ),
                   ),
