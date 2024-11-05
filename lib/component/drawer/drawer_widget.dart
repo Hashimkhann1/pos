@@ -5,10 +5,12 @@ import 'package:pos/view/branch/dashboard/dashboard_view.dart';
 import 'package:pos/view/branch/expense/expense_view.dart';
 import 'package:pos/view/branch/installment/company_ledger_view.dart';
 import 'package:pos/view/branch/installment/customer_ledger.dart';
+import 'package:pos/view/branch/order/order_view.dart';
+import 'package:pos/view/branch/product/category_view.dart';
 import 'package:pos/view/branch/product/stock_inventory_view.dart';
+import 'package:pos/view/branch/sales_products_view/all_products_and_total_view/all_products_and_total_view.dart';
 import '../../res/color/app_color.dart';
 import '../../view/branch/company/company_view.dart';
-import '../../view/branch/sales_products_view/all_products_view/all_products_view.dart';
 
 class DrawerWidget extends StatefulWidget {
   const DrawerWidget({super.key});
@@ -39,10 +41,10 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   borderRadius: BorderRadius.circular(5),
                   color: AppColor.primaryColor,
                 ),
-                child: Center(child: Icon(CupertinoIcons.home,color: Colors.white,size: 16,)),
+                child: const Center(child: Icon(CupertinoIcons.home,color: Colors.white,size: 16,)),
               ),
-              title: Text("Dashboard"),
-              trailing: Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
+              title: const Text("Dashboard"),
+              trailing: const Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
               onTap: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => const DashboardView()));
               },
@@ -55,19 +57,19 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   borderRadius: BorderRadius.circular(5),
                   color: AppColor.primaryColor,
                 ),
-                child: Center(child: Icon(CupertinoIcons.doc_plaintext,color: Colors.white,size: 16,)),
+                child: const Center(child: Icon(CupertinoIcons.doc_plaintext,color: Colors.white,size: 16,)),
               ),
               title: const Text("Sale Invoice"),
               children: [
                 ListTile(
-                  leading: Icon(CupertinoIcons.cart_badge_plus,color: AppColor.primaryColor,),
-                  title: Text("Add Sale"),
-                  trailing: Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
+                  leading: const Icon(CupertinoIcons.cart_badge_plus,color: AppColor.primaryColor,),
+                  title: const Text("Add Sale"),
+                  trailing: const Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
                   onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => AllProductsView()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const AllProductsView()));
                   },
                 ),
-                ListTile(
+                const ListTile(
                   leading: Icon(CupertinoIcons.arrow_turn_up_left,color: AppColor.primaryColor,),
                   title: Text("Sale Return"),
                   trailing: Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
@@ -82,24 +84,24 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   borderRadius: BorderRadius.circular(5),
                   color: AppColor.primaryColor,
                 ),
-                child: Center(child: Icon(CupertinoIcons.cube_box,color: Colors.white,size: 16,)),
+                child: const Center(child: Icon(CupertinoIcons.cube_box,color: Colors.white,size: 16,)),
               ),
               title: const Text("Product"),
               children: [
                 ListTile(
-                  leading: Icon(CupertinoIcons.square_list,color: AppColor.primaryColor,),
-                  title: Text("Category"),
-                  trailing: Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
+                  leading: const Icon(CupertinoIcons.square_list,color: AppColor.primaryColor,),
+                  title: const Text("Category"),
+                  trailing: const Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
                   onTap: (){
-
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => CategoryView()));
                   },
                 ),
                 ListTile(
-                  leading: Icon(CupertinoIcons.archivebox,color: AppColor.primaryColor,),
-                  title: Text("Stock Inventory"),
-                  trailing: Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
+                  leading: const Icon(CupertinoIcons.archivebox,color: AppColor.primaryColor,),
+                  title: const Text("Stock Inventory"),
+                  trailing: const Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
                   onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => StockInventoryView()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const StockInventoryView()));
                   },
                 ),
               ],
@@ -112,16 +114,19 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   borderRadius: BorderRadius.circular(5),
                   color: AppColor.primaryColor,
                 ),
-                child: Center(child: Icon(CupertinoIcons.shopping_cart,color: Colors.white,size: 16,)),
+                child: const Center(child: Icon(CupertinoIcons.shopping_cart,color: Colors.white,size: 16,)),
               ),
               title: const Text("Order Invoice"),
-              children: const [
+              children: [
                 ListTile(
-                  leading: Icon(CupertinoIcons.cart_badge_plus,color: AppColor.primaryColor,),
-                  title: Text("Add Order"),
-                  trailing: Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
+                  leading: const Icon(CupertinoIcons.cart_badge_plus,color: AppColor.primaryColor,),
+                  title: const Text("Add Order"),
+                  trailing: const Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => OrderView()));
+                  },
                 ),
-                ListTile(
+                const ListTile(
                   leading: Icon(CupertinoIcons.arrow_turn_up_left,color: AppColor.primaryColor,),
                   title: Text("Order Return"),
                   trailing: Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
@@ -136,10 +141,10 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   borderRadius: BorderRadius.circular(5),
                   color: AppColor.primaryColor,
                 ),
-                child: Center(child: Icon(CupertinoIcons.person_alt,color: Colors.white,size: 16,)),
+                child: const Center(child: Icon(CupertinoIcons.person_alt,color: Colors.white,size: 16,)),
               ),
-              title: Text("Customer"),
-              trailing: Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
+              title: const Text("Customer"),
+              trailing: const Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
               onTap: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => const CustomerView()));
               },
@@ -152,10 +157,10 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   borderRadius: BorderRadius.circular(5),
                   color: AppColor.primaryColor,
                 ),
-                child: Center(child: Icon(CupertinoIcons.group,color: Colors.white,size: 16,)),
+                child: const Center(child: Icon(CupertinoIcons.group,color: Colors.white,size: 16,)),
               ),
-              title: Text("Company"),
-              trailing: Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
+              title: const Text("Company"),
+              trailing: const Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
               onTap: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => const SupplierView()));
               },
@@ -168,10 +173,10 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   borderRadius: BorderRadius.circular(5),
                   color: AppColor.primaryColor,
                 ),
-                child: Center(child: Icon(CupertinoIcons.money_dollar,color: Colors.white,size: 16,)),
+                child: const Center(child: Icon(CupertinoIcons.money_dollar,color: Colors.white,size: 16,)),
               ),
-              title: Text("Expense"),
-              trailing: Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
+              title: const Text("Expense"),
+              trailing: const Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
               onTap: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => const ExpenseView()));
               },
@@ -186,20 +191,20 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 ),
                 child: const Center(child: Icon(CupertinoIcons.creditcard,color: Colors.white,size: 16,)),
               ),
-              title: Text("Installment"),
+              title: const Text("Installment"),
               children: [
                 ListTile(
-                  leading: Icon(CupertinoIcons.person_alt,color: AppColor.primaryColor,),
-                  title: Text("Customer Installment"),
-                  trailing: Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
+                  leading: const Icon(CupertinoIcons.person_alt,color: AppColor.primaryColor,),
+                  title: const Text("Customer Installment"),
+                  trailing: const Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
                   onTap: (){
                     Navigator.push(context, MaterialPageRoute(builder: (context) => const CustomerLedgerView()));
                   },
                 ),
                 ListTile(
-                  leading: Icon(CupertinoIcons.group,color: AppColor.primaryColor,),
-                  title: Text("Company Installment"),
-                  trailing: Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
+                  leading: const Icon(CupertinoIcons.group,color: AppColor.primaryColor,),
+                  title: const Text("Company Installment"),
+                  trailing: const Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
                   onTap: (){
                     Navigator.push(context, MaterialPageRoute(builder: (context) => const CompanyLedgerView()));
                   },
