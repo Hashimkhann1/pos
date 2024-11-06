@@ -43,7 +43,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 ),
                 child: const Center(child: Icon(CupertinoIcons.home,color: Colors.white,size: 16,)),
               ),
-              title: const Text("Dashboard"),
+              title: const Text("Report"),
               trailing: const Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
               onTap: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => const DashboardView()));
@@ -133,106 +133,106 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 ),
               ],
             ),
-            ListTile(
-              leading: Container(
-                height: 30,
-                width: 30,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: AppColor.primaryColor,
-                ),
-                child: const Center(child: Icon(CupertinoIcons.person_alt,color: Colors.white,size: 16,)),
-              ),
-              title: const Text("Customer"),
-              trailing: const Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const CustomerView()));
-              },
-            ),
-            ListTile(
-              leading: Container(
-                height: 30,
-                width: 30,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: AppColor.primaryColor,
-                ),
-                child: const Center(child: Icon(CupertinoIcons.group,color: Colors.white,size: 16,)),
-              ),
-              title: const Text("Company"),
-              trailing: const Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const SupplierView()));
-              },
-            ),
-            ListTile(
-              leading: Container(
-                height: 30,
-                width: 30,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: AppColor.primaryColor,
-                ),
-                child: const Center(child: Icon(CupertinoIcons.money_dollar,color: Colors.white,size: 16,)),
-              ),
-              title: const Text("Expense"),
-              trailing: const Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const ExpenseView()));
-              },
-            ),
-            ExpansionTile(
-              leading: Container(
-                height: 30,
-                width: 30,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: AppColor.primaryColor,
-                ),
-                child: const Center(child: Icon(CupertinoIcons.creditcard,color: Colors.white,size: 16,)),
-              ),
-              title: const Text("Installment"),
-              children: [
-                ListTile(
-                  leading: const Icon(CupertinoIcons.person_alt,color: AppColor.primaryColor,),
-                  title: const Text("Customer Installment"),
-                  trailing: const Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
-                  onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const CustomerLedgerView()));
-                  },
-                ),
-                ListTile(
-                  leading: const Icon(CupertinoIcons.group,color: AppColor.primaryColor,),
-                  title: const Text("Company Installment"),
-                  trailing: const Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
-                  onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const CompanyLedgerView()));
-                  },
-                ),
-              ],
-            ),
-            ExpansionTile(
-              leading: Container(
-                height: 30,
-                width: 30,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: AppColor.primaryColor,
-                ),
-                child: const Center(child: Icon(CupertinoIcons.chart_bar,color: Colors.white,size: 16,)),
-              ),
-              title: const Text("Report"),
-              children: const [
-                ListTile(
-                  leading: Icon(CupertinoIcons.cart_badge_plus),
-                  title: Text("Add Order"),
-                ),
-                ListTile(
-                  leading: Icon(CupertinoIcons.arrow_turn_up_left),
-                  title: Text("Order Return"),
-                ),
-              ],
-            ),
+            // ListTile(
+            //   leading: Container(
+            //     height: 30,
+            //     width: 30,
+            //     decoration: BoxDecoration(
+            //       borderRadius: BorderRadius.circular(5),
+            //       color: AppColor.primaryColor,
+            //     ),
+            //     child: const Center(child: Icon(CupertinoIcons.person_alt,color: Colors.white,size: 16,)),
+            //   ),
+            //   title: const Text("Customer"),
+            //   trailing: const Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
+            //   onTap: (){
+            //     Navigator.push(context, MaterialPageRoute(builder: (context) => const CustomerView()));
+            //   },
+            // ),
+            // ListTile(
+            //   leading: Container(
+            //     height: 30,
+            //     width: 30,
+            //     decoration: BoxDecoration(
+            //       borderRadius: BorderRadius.circular(5),
+            //       color: AppColor.primaryColor,
+            //     ),
+            //     child: const Center(child: Icon(CupertinoIcons.group,color: Colors.white,size: 16,)),
+            //   ),
+            //   title: const Text("Company"),
+            //   trailing: const Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
+            //   onTap: (){
+            //     Navigator.push(context, MaterialPageRoute(builder: (context) => const SupplierView()));
+            //   },
+            // ),
+            // ListTile(
+            //   leading: Container(
+            //     height: 30,
+            //     width: 30,
+            //     decoration: BoxDecoration(
+            //       borderRadius: BorderRadius.circular(5),
+            //       color: AppColor.primaryColor,
+            //     ),
+            //     child: const Center(child: Icon(CupertinoIcons.money_dollar,color: Colors.white,size: 16,)),
+            //   ),
+            //   title: const Text("Expense"),
+            //   trailing: const Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
+            //   onTap: (){
+            //     Navigator.push(context, MaterialPageRoute(builder: (context) => const ExpenseView()));
+            //   },
+            // ),
+            // ExpansionTile(
+            //   leading: Container(
+            //     height: 30,
+            //     width: 30,
+            //     decoration: BoxDecoration(
+            //       borderRadius: BorderRadius.circular(5),
+            //       color: AppColor.primaryColor,
+            //     ),
+            //     child: const Center(child: Icon(CupertinoIcons.creditcard,color: Colors.white,size: 16,)),
+            //   ),
+            //   title: const Text("Installment"),
+            //   children: [
+            //     ListTile(
+            //       leading: const Icon(CupertinoIcons.person_alt,color: AppColor.primaryColor,),
+            //       title: const Text("Customer Installment"),
+            //       trailing: const Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
+            //       onTap: (){
+            //         Navigator.push(context, MaterialPageRoute(builder: (context) => const CustomerLedgerView()));
+            //       },
+            //     ),
+            //     ListTile(
+            //       leading: const Icon(CupertinoIcons.group,color: AppColor.primaryColor,),
+            //       title: const Text("Company Installment"),
+            //       trailing: const Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
+            //       onTap: (){
+            //         Navigator.push(context, MaterialPageRoute(builder: (context) => const CompanyLedgerView()));
+            //       },
+            //     ),
+            //   ],
+            // ),
+            // ExpansionTile(
+            //   leading: Container(
+            //     height: 30,
+            //     width: 30,
+            //     decoration: BoxDecoration(
+            //       borderRadius: BorderRadius.circular(5),
+            //       color: AppColor.primaryColor,
+            //     ),
+            //     child: const Center(child: Icon(CupertinoIcons.chart_bar,color: Colors.white,size: 16,)),
+            //   ),
+            //   title: const Text("Report"),
+            //   children: const [
+            //     ListTile(
+            //       leading: Icon(CupertinoIcons.cart_badge_plus),
+            //       title: Text("Add Order"),
+            //     ),
+            //     ListTile(
+            //       leading: Icon(CupertinoIcons.arrow_turn_up_left),
+            //       title: Text("Order Return"),
+            //     ),
+            //   ],
+            // ),
           ],
         ),
       ),
