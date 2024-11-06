@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pos/component/app_text_field.dart';
+import 'package:pos/component/drawer/drawer_widget.dart';
 import 'package:pos/component/my_text.dart';
 import 'package:pos/res/color/app_color.dart';
 
@@ -14,6 +15,7 @@ class CategoryView extends StatelessWidget {
         appBar: AppBar(
           title: const MyText(title: "Product Categories"),
         ),
+        drawer: DrawerWidget(),
         body: Center(
           child: Container(
               width: 600,

@@ -34,14 +34,8 @@ class SaleInvoiceView extends StatelessWidget {
           const SizedBox(height: 10,),
 
           /// sell button
-          TextButton(
-            style: TextButton.styleFrom(
-              padding: const EdgeInsets.symmetric(horizontal: 40,vertical: 16),
-                backgroundColor: AppColor.primaryColor
-            ),
-              onPressed: (){},
-              child: const MyText(title: "Sell",fontSize: 18,fontWeight: FontWeight.bold,color: AppColor.white,)
-          )
+          ElevatedButton(
+              onPressed: (){}, child: Text("Sell"))
         ],
       ),
     );

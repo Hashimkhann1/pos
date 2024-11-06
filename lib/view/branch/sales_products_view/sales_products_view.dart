@@ -14,8 +14,8 @@ class SalesProductsView extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
 
     return Container(
-        width: width < 1300 ? width * 0.45 : width * 0.42,
-        decoration: BoxDecoration(color: AppColor.white,border: Border.all(color: AppColor.black.withOpacity(0.4))),
+        width: width < 1300 ? width * 0.45 : width * 0.35,
+        decoration: BoxDecoration(color: AppColor.white,border: Border.all(color: AppColor.grey.withOpacity(0.4))),
         margin: const EdgeInsets.only(left: 10,top: 10,bottom: 10),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 7, vertical: height * 0.01),
@@ -67,7 +67,7 @@ class SalesProductsView extends StatelessWidget {
 
                                 // context.read<SelectedProductForSellBloc>().add(AddSelectedProductToSellSection(productDetail: proData));
                               }, cells: [
-                            DataCell(MyText(title: index.toString()),),const DataCell(MyText(title: "Product Name"),),
+                            DataCell(MyText(title: "${index + 1}"),),const DataCell(MyText(title: "Product Name"),),
                             DataCell(MyText(title: "${2 * index}"),),
                             DataCell(MyText(title: "${index == 0 ? 40 : 6 * index}"),),
                           ]);
@@ -82,7 +82,7 @@ class SalesProductsView extends StatelessWidget {
                         headingRowHeight: 36.0,
                         showCheckboxColumn: false,
                         border: TableBorder.all(
-                          color: AppColor.black.withOpacity(0.3),
+                          color: AppColor.grey.withOpacity(0.1),
                         ),
                       ),
                     ),
