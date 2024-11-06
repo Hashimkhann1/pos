@@ -4,4 +4,8 @@
 
 ## Getting Started
 
+- Sale Invoice Ui is completed
+- Add Product Ui is almost completed
+- Add category UI is completed
+- Report Ui is almost completed
 - Working on UI
