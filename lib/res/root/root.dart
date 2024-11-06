@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: LightTheme.lightTheme,
         // home: const StockInventoryView(),
-        home: const AllProductsView(),
+        home: AllProductsView(),
     );
   }
 }

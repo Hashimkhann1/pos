@@ -66,7 +66,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   title: const Text("Add Sale"),
                   trailing: const Icon(Icons.keyboard_arrow_right,color: AppColor.primaryColor,),
                   onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const AllProductsView()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => AllProductsView()));
                   },
                 ),
                 const ListTile(

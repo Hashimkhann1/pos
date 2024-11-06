@@ -4,9 +4,13 @@ import 'package:pos/component/customtablecell/custom_table_cell.dart';
 import 'package:pos/res/color/app_color.dart';
 import 'package:pos/view/branch/sales_products_view/sale_invoice_view/sale_invoice_view.dart';
 
-class SelectedProductForSaleView extends StatefulWidget {
-  const SelectedProductForSaleView({super.key});
+import '../all_products_and_total_view/all_products_and_total_view.dart';
+import '../sales_products_view.dart';
 
+class SelectedProductForSaleView extends StatefulWidget {
+  final List<Product> products;
+
+  const SelectedProductForSaleView({super.key, required this.products});
   @override
   State<SelectedProductForSaleView> createState() => _SelectedProductForSaleViewState();
 }
@@ -14,26 +18,17 @@ class SelectedProductForSaleView extends StatefulWidget {
 class _SelectedProductForSaleViewState extends State<SelectedProductForSaleView> {
   List<TextEditingController> quantityControllers = [];
 
-  // Sample data for the table
-  List<Map<String, dynamic>> products = List.generate(5, (index) => {
-    'productName': 'Product $index',
-    'description': 'Description $index',
-    'unitPrice': 200.0, // Assuming a fixed price for simplicity
-    'quantity': 2, // Initial quantity
-  });
-
   @override
   void initState() {
     super.initState();
-    // Initialize controllers for each product
-    for (var product in products) {
-      quantityControllers.add(TextEditingController(text: product['quantity'].toString()));
+    // Initialize controllers for each selected product
+    for (var product in widget.products) {
+      quantityControllers.add(TextEditingController(text: product.quantity.toString()));
     }
   }
 
   @override
   void dispose() {
-    // Dispose of the controllers to avoid memory leaks
     for (var controller in quantityControllers) {
       controller.dispose();
     }
@@ -82,41 +77,25 @@ class _SelectedProductForSaleViewState extends State<SelectedProductForSaleView>
                         DataColumn(label: Text('Total')),
                         DataColumn(label: Text('Delete')),
                       ],
-                      rows: List.generate(products.length, (index) {
-                        final product = products[index];
-                        final unitPrice = product['unitPrice'];
-                        final discount = 0.0;
-                        final tax = 5.0;
-                        double quantity = double.parse(quantityControllers[index].text);
-                        double total = (quantity * unitPrice) - discount + tax;
-
+                      rows: List.generate(widget.products.length, (index) {
+                        var product = widget.products[index];
                         return DataRow(
                           cells: [
-                            DataCell(Text(product['productName'])),
-                            DataCell(Text(product['description'])),
-                            DataCell(
-                              TextField(
-                                controller: quantityControllers[index],
-                                keyboardType: TextInputType.number,
-                                decoration: InputDecoration(border: InputBorder.none),
-                                onChanged: (value) {
-                                  setState(() {
-                                    products[index]['quantity'] = double.tryParse(value) ?? 0;
-                                  });
-                                },
-                              ),
-                            ),
-                            DataCell(Text(unitPrice.toStringAsFixed(2))),
-                            DataCell(Text(discount.toStringAsFixed(2))),
-                            DataCell(Text(tax.toStringAsFixed(2))),
-                            DataCell(Text(total.toStringAsFixed(2))),
-                            DataCell(InkWell(
-                              onTap: (){
-
+                            DataCell(Text(product.productName)),
+                            DataCell(Text(product.description)),
+                            DataCell(TextField(
+                              controller: quantityControllers[index],
+                              keyboardType: TextInputType.number,
+                              onChanged: (value) {
+                                setState(() {
+                                  product.quantity = int.tryParse(value) ?? product.quantity;
+                                });
                               },
-                              child: Icon(Icons.remove_circle,size: 18,),
-                            ),
-                            ),
+                            )),
+                            DataCell(Text('${product.price}')),
+                            DataCell(Text('${product.discount}')),
+                            DataCell(Text('${product.tax}')),
+                            DataCell(Text('${800}')),
                           ],
                         );
                       }),
@@ -164,3 +143,6 @@ class _SelectedProductForSaleViewState extends State<SelectedProductForSaleView>
     );
   }
 }
+
+
+
