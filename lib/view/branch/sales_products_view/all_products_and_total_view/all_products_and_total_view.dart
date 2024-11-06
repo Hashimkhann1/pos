@@ -15,11 +15,42 @@ class AllProductsView extends StatefulWidget {
 
 class _AllProductsViewState extends State<AllProductsView> {
   List<Product> addProduct = [];
+  TextEditingController _searchController = TextEditingController();
+
+  // Filtered list of products
+  List<Product> filteredProductList = List.from(mockProductList);
+
+  @override
+  void initState() {
+    super.initState();
+    // Add listener to update the filtered list based on search input
+    _searchController.addListener(_filterProducts);
+  }
+
+  // Method to filter the product list based on search input
+  void _filterProducts() {
+    String query = _searchController.text.toLowerCase();
+    setState(() {
+      filteredProductList = mockProductList.where((product) {
+        return product.productName.toLowerCase().contains(query);
+      }).toList();
+    });
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  // Inside _AllProductsViewState class
 
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Sale Product"),
@@ -28,140 +59,138 @@ class _AllProductsViewState extends State<AllProductsView> {
       body: Row(
         children: [
           Container(
-              width: width < 1300 ? width * 0.45 : width * 0.35,
-              decoration: BoxDecoration(color: AppColor.white,border: Border.all(color: AppColor.grey.withOpacity(0.4))),
-              margin: const EdgeInsets.only(left: 10,top: 10,bottom: 10),
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 7, vertical: height * 0.01),
-                child: Column(
-                  children: [
-                    const Row(
-                      children: [
-                        Expanded(
-                            flex: 3,
-                            child: AppTextField(
-                              hintText: "Search products",
-                              // borderRadius: 0,
-                            )),
-                      ],
-                    ),
-                    SizedBox(height: height * 0.02,),
+            width: width < 1300 ? width * 0.45 : width * 0.35,
+            decoration: BoxDecoration(color: AppColor.white, border: Border.all(color: AppColor.grey.withOpacity(0.4))),
+            margin: const EdgeInsets.only(left: 10, top: 10, bottom: 10),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 7, vertical: height * 0.01),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 3,
+                        child: AppTextField(
+                          hintText: "Search products",
+                          controller: _searchController,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: height * 0.02),
 
-                    /// All products
-                    Expanded (
+                  /// All products
+                  Expanded(
+                    child: SingleChildScrollView(
+                      scrollDirection: width < 1160 ? Axis.horizontal : Axis.vertical,
                       child: SingleChildScrollView(
-                        scrollDirection: width < 1160 ? Axis.horizontal : Axis.vertical,
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.vertical,
-                          child: SizedBox(
-                            width: width < 1160 ? width * 0.54 : width,
-                            child: DataTable(
-                              columns: [
-                                DataColumn(
-                                  label: MyText(
-                                    title: '#',
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 14,
-                                    color: AppColor.black.withOpacity(0.8),
-                                  ),
+                        scrollDirection: Axis.vertical,
+                        child: SizedBox(
+                          width: width < 1160 ? width * 0.54 : width,
+                          child: DataTable(
+                            columns: [
+                              DataColumn(
+                                label: MyText(
+                                  title: '#',
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 14,
+                                  color: AppColor.black.withOpacity(0.8),
                                 ),
-                                DataColumn(
-                                  label: MyText(
-                                    title: 'Product Name',
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 14,
-                                    color: AppColor.black.withOpacity(0.8),
-                                  ),
-                                ),
-                                DataColumn(
-                                  label: MyText(
-                                    title: 'In Stock',
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 14,
-                                    color: AppColor.black.withOpacity(0.8),
-                                  ),
-                                ),
-                                DataColumn(
-                                  label: MyText(
-                                    title: 'Unit Price',
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 14,
-                                    color: AppColor.black.withOpacity(0.8),
-                                  ),
-                                ),
-                              ],
-                              rows: List.generate(mockProductList.length, (index) {
-                                return DataRow(
-                                    onSelectChanged: (val) {
-                                      setState(() {
-                                        // Check if the product already exists in the addProduct list
-                                        bool productExists = false;
-
-                                        // Find the selected product in the mockProductList
-                                        var selectedProduct = mockProductList[index];
-
-                                        if (selectedProduct.quantity > 0) {
-                                          // Check if the product already exists in the addProduct list
-                                          for (var existingProduct in addProduct) {
-                                            if (existingProduct.productName == selectedProduct.productName) {
-                                              // If the product exists in addProduct, increment the quantity by 1
-                                              existingProduct.quantity += 1;
-                                              productExists = true;
-                                              break;
-                                            }
-                                          }
-
-                                          // If the product doesn't exist, add it to the addProduct list with quantity 1
-                                          if (!productExists) {
-                                            addProduct.add(
-                                              Product(
-                                                productName: selectedProduct.productName,
-                                                description: selectedProduct.description,
-                                                quantity: 1,  // Add the product with quantity 1
-                                                price: selectedProduct.price,
-                                                discount: selectedProduct.discount,
-                                                tax: selectedProduct.tax,
-                                              ),
-                                            );
-                                          }
-
-                                          // Decrease the quantity in the mockProductList by 1
-                                          selectedProduct.quantity -= 1;
-
-                                          // Debugging print statement
-                                          print(addProduct);
-                                          print(mockProductList);
-                                        }
-                                      });
-                                    },
-                                    cells: [
-                                    DataCell(MyText(title: "${index + 1}")),
-                                    DataCell(MyText(title: "${mockProductList[index].productName}")),
-                                    DataCell(MyText(title: "${mockProductList[index].quantity}")),
-                                    DataCell(MyText(title: "${mockProductList[index].price}")),
-                                  ],
-                                );
-                              }),
-                              columnSpacing: 10.0,
-                              horizontalMargin: 10.0,
-                              dividerThickness: 1.0,
-                              showBottomBorder: true,
-                              sortColumnIndex: 0,
-                              sortAscending: true,
-                              dataRowHeight: 32.0,
-                              headingRowHeight: 36.0,
-                              showCheckboxColumn: false,
-                              border: TableBorder.all(
-                                color: AppColor.grey.withOpacity(0.1),
                               ),
+                              DataColumn(
+                                label: MyText(
+                                  title: 'Product Name',
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 14,
+                                  color: AppColor.black.withOpacity(0.8),
+                                ),
+                              ),
+                              DataColumn(
+                                label: MyText(
+                                  title: 'In Stock',
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 14,
+                                  color: AppColor.black.withOpacity(0.8),
+                                ),
+                              ),
+                              DataColumn(
+                                label: MyText(
+                                  title: 'Unit Price',
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 14,
+                                  color: AppColor.black.withOpacity(0.8),
+                                ),
+                              ),
+                            ],
+                            rows: List.generate(filteredProductList.length, (index) {
+                              return DataRow(
+                                onSelectChanged: (val) {
+                                  setState(() {
+                                    // Ensure you are selecting from filteredProductList
+                                    var selectedProduct = filteredProductList[index];
+
+                                    // Check if the product is already in the addProduct list
+                                    bool productExists = false;
+
+                                    if (selectedProduct.quantity > 0) {
+                                      // Check if the product already exists in the addProduct list
+                                      for (var existingProduct in addProduct) {
+                                        if (existingProduct.productName == selectedProduct.productName) {
+                                          existingProduct.quantity += 1;
+                                          productExists = true;
+                                          break;
+                                        }
+                                      }
+
+                                      // If product doesn't exist, add it to the list
+                                      if (!productExists) {
+                                        addProduct.add(Product(
+                                          productName: selectedProduct.productName,
+                                          description: selectedProduct.description,
+                                          quantity: 1,
+                                          price: selectedProduct.price,
+                                          discount: selectedProduct.discount,
+                                          tax: selectedProduct.tax,
+                                        ));
+                                      }
+
+                                      // Decrease the stock quantity of the selected product
+                                      selectedProduct.quantity -= 1;
+
+                                      print("Selected Product Added: ${selectedProduct.productName}");
+                                      print("Updated AddProduct List: $addProduct");
+                                      print("Updated MockProduct List: $mockProductList");
+                                    }
+                                  });
+                                },
+                                cells: [
+                                  DataCell(MyText(title: "${index + 1}")),
+                                  DataCell(MyText(title: "${filteredProductList[index].productName}")),
+                                  DataCell(MyText(title: "${filteredProductList[index].quantity}")),
+                                  DataCell(MyText(title: "${filteredProductList[index].price}")),
+                                ],
+                              );
+                            }),
+                            columnSpacing: 10.0,
+                            horizontalMargin: 10.0,
+                            dividerThickness: 1.0,
+                            showBottomBorder: true,
+                            sortColumnIndex: 0,
+                            sortAscending: true,
+                            dataRowHeight: 32.0,
+                            headingRowHeight: 36.0,
+                            showCheckboxColumn: false,
+                            border: TableBorder.all(
+                              color: AppColor.grey.withOpacity(0.1),
                             ),
                           ),
                         ),
                       ),
-                    )
-                  ],
-                ),
-              )
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
           /// Selected product for sale view
           Expanded(
@@ -183,8 +212,7 @@ class _AllProductsViewState extends State<AllProductsView> {
                   Expanded(
                     child: SingleChildScrollView(
                       child: DataTable(
-                        // columnSpacing: 85,
-                        headingTextStyle: TextStyle(color: AppColor.black,fontWeight: FontWeight.bold,fontSize: 14),
+                        headingTextStyle: TextStyle(color: AppColor.black, fontWeight: FontWeight.bold, fontSize: 14),
                         headingRowHeight: 30,
                         border: TableBorder.all(color: AppColor.grey.withOpacity(0.1)),
                         columns: [
@@ -204,10 +232,10 @@ class _AllProductsViewState extends State<AllProductsView> {
                               DataCell(Text(product.productName)),
                               DataCell(Text(product.description)),
                               DataCell(Text(addProduct[index].quantity.toString())),
-                              DataCell(Text(product.price.toString())),  // Assuming price is a field in the product
-                              DataCell(Text(product.discount.toString())),  // Assuming discount is a field in the product
-                              DataCell(Text(product.tax.toString())),  // Assuming tax is a field in the product
-                              DataCell(Text((product.price * product.quantity).toStringAsFixed(0))),  // Assuming total calculation
+                              DataCell(Text(product.price.toString())),
+                              DataCell(Text(product.discount.toString())),
+                              DataCell(Text(product.tax.toString())),
+                              DataCell(Text((product.price * product.quantity).toStringAsFixed(2))),
                               DataCell(IconButton(
                                 icon: Icon(Icons.delete),
                                 onPressed: () {
@@ -229,7 +257,9 @@ class _AllProductsViewState extends State<AllProductsView> {
                       children: [
                         Text("Total: ", style: TextStyle(fontSize: 16)),
                         Text(
-                          "0.00",
+                          addProduct.fold(0, (previousValue, product) {
+                            return previousValue + (product.price * product.quantity).toInt();
+                          }).toStringAsFixed(2),
                           style: TextStyle(color: Colors.green, fontSize: 16),
                         ),
                       ],
@@ -263,6 +293,7 @@ class _AllProductsViewState extends State<AllProductsView> {
       ),
     );
   }
+
 }
 
 
