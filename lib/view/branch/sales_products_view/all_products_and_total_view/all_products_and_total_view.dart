@@ -192,6 +192,7 @@ class _AllProductsViewState extends State<AllProductsView> {
               ),
             ),
           ),
+
           /// Selected product for sale view
           Expanded(
             flex: 3,
