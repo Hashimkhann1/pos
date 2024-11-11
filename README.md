@@ -9,3 +9,4 @@
 - Add category UI is completed
 - Report Ui is almost completed
 - Working on UI
+- Firebase is added
