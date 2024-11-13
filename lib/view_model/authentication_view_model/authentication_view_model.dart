@@ -2,9 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pos/res/root/root.dart';
 import 'package:pos/view/authentication/login_view.dart';
+import 'package:pos/view_model/bloc/loading_bloc/loading_bloc/loading_bloc.dart';
 
 import '../../view/branch/sale_invoice/sale_invoice_view.dart';
+import '../bloc/loading_bloc/loading_bloc_event/loading_bloc_event.dart';
 
 
 class AuthenticationViewModel {
@@ -15,12 +19,14 @@ class AuthenticationViewModel {
 
   Future addInitialStoreData(BuildContext context, String id , storeName , email) async {
     try{
+
       await _firestore.doc(id).set({
         "storeId" : id,
         "storeName" : storeName,
         "storeEmail" : email,
         "createdData" : DateTime.now()
-      }).then((value) {});
+      }).then((value) {
+      });
     }catch(error) {
       if(kDebugMode){
         print("Error while adding initil User Data >>>>>>>>> $error");
@@ -31,12 +37,15 @@ class AuthenticationViewModel {
 
   /// sign in method
   Future<void> signIn(BuildContext context , String email , password) async {
+    context.read<LoadingBloc>().add(SetLoading());
     try{
       await _auth.signInWithEmailAndPassword(email: email, password: password).then((value) {
         // Utils.toastMessage("User Sign in successfully");
+        context.read<LoadingBloc>().add(SetLoading());
         Navigator.push(context, MaterialPageRoute(builder: (context) => SaleInvoiceView()));
       });
     }on FirebaseAuthException catch(error){
+      context.read<LoadingBloc>().add(SetLoading());
       if(kDebugMode){
         print("Error while signing up from AuthViewModel >>>>>>> ${error.message} >>>>");
       }
