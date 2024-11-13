@@ -18,6 +18,7 @@ class AppTextField extends StatelessWidget {
     this.enable = true,
     this.width = 300,
     this.height = 35,
+    this.fontSize = 12,
     super.key});
 
 
@@ -34,6 +35,7 @@ class AppTextField extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final double width;
   final double height;
+  final double fontSize;
 
 
 
@@ -49,9 +51,9 @@ class AppTextField extends StatelessWidget {
         inputFormatters: inputFormatters,
         cursorHeight: 12,
         cursorColor: AppColor.primaryColor,
-        style: const TextStyle(
+        style: TextStyle(
           fontWeight: FontWeight.w700,
-          fontSize: 12,
+          fontSize: fontSize,
         ),
         decoration: InputDecoration(
           hintText: hintText,
