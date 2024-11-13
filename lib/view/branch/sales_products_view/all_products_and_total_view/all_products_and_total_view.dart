@@ -3,11 +3,9 @@ import 'package:pos/component/drawer/drawer_widget.dart';
 import '../../../../component/app_text_field.dart';
 import '../../../../component/my_text.dart';
 import '../../../../res/color/app_color.dart';
-import '../sales_products_view.dart';
-import '../selected_product_for_sale_view/selected_product_for_sale_view.dart';
 
 class AllProductsView extends StatefulWidget {
-  AllProductsView({super.key});
+  const AllProductsView({super.key});
 
   @override
   State<AllProductsView> createState() => _AllProductsViewState();
@@ -15,7 +13,7 @@ class AllProductsView extends StatefulWidget {
 
 class _AllProductsViewState extends State<AllProductsView> {
   List<Product> addProduct = [];
-  TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
 
   // Filtered list of products
   List<Product> filteredProductList = List.from(mockProductList);
@@ -165,7 +163,7 @@ class _AllProductsViewState extends State<AllProductsView> {
                                 },
                                 cells: [
                                   DataCell(MyText(title: "${index + 1}")),
-                                  DataCell(MyText(title: "${filteredProductList[index].productName}")),
+                                  DataCell(MyText(title: filteredProductList[index].productName)),
                                   DataCell(MyText(title: "${filteredProductList[index].quantity}")),
                                   DataCell(MyText(title: "${filteredProductList[index].price}")),
                                 ],
@@ -205,18 +203,18 @@ class _AllProductsViewState extends State<AllProductsView> {
                     height: 30,
                     width: double.infinity,
                     color: AppColor.primaryColor,
-                    child: Center(child: Text("Cash Sale",style: TextStyle(color: AppColor.white,fontWeight: FontWeight.bold,fontSize: 14),)),
+                    child: const Center(child: Text("Cash Sale",style: TextStyle(color: AppColor.white,fontWeight: FontWeight.bold,fontSize: 14),)),
                   ),
-                  SizedBox(height: 10,),
-                  AppTextField(hintText: "Search Item"),
-                  SizedBox(height: 10,),
+                  const SizedBox(height: 10,),
+                  const AppTextField(hintText: "Search Item"),
+                  const SizedBox(height: 10,),
                   Expanded(
                     child: SingleChildScrollView(
                       child: DataTable(
-                        headingTextStyle: TextStyle(color: AppColor.black, fontWeight: FontWeight.bold, fontSize: 14),
+                        headingTextStyle: const TextStyle(color: AppColor.black, fontWeight: FontWeight.bold, fontSize: 14),
                         headingRowHeight: 30,
                         border: TableBorder.all(color: AppColor.grey.withOpacity(0.1)),
-                        columns: [
+                        columns: const [
                           DataColumn(label: Text('Product')),
                           DataColumn(label: Text('Description')),
                           DataColumn(label: Text('Qty')),
@@ -238,7 +236,7 @@ class _AllProductsViewState extends State<AllProductsView> {
                               DataCell(Text(product.tax.toString())),
                               DataCell(Text((product.price * product.quantity).toStringAsFixed(2))),
                               DataCell(IconButton(
-                                icon: Icon(Icons.delete),
+                                icon: const Icon(Icons.delete),
                                 onPressed: () {
                                   setState(() {
                                     addProduct.removeAt(index);
@@ -256,12 +254,12 @@ class _AllProductsViewState extends State<AllProductsView> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Text("Total: ", style: TextStyle(fontSize: 16)),
+                        const Text("Total: ", style: TextStyle(fontSize: 16)),
                         Text(
                           addProduct.fold(0, (previousValue, product) {
                             return previousValue + (product.price * product.quantity).toInt();
                           }).toStringAsFixed(2),
-                          style: TextStyle(color: Colors.green, fontSize: 16),
+                          style: const TextStyle(color: Colors.green, fontSize: 16),
                         ),
                       ],
                     ),
@@ -275,13 +273,13 @@ class _AllProductsViewState extends State<AllProductsView> {
                           onPressed: () {
                             // Hold Sale logic
                           },
-                          child: Text('Hold Sale'),
+                          child: const Text('Hold Sale'),
                         ),
                         ElevatedButton(
                           onPressed: () {
                             // Payment logic
                           },
-                          child: Text('Payment'),
+                          child: const Text('Payment'),
                         ),
                       ],
                     ),
