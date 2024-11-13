@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pos/component/app_text_button.dart';
 import 'package:pos/component/app_text_field.dart';
 import 'package:pos/component/my_text.dart';
 import 'package:pos/res/color/app_color.dart';
 import 'package:pos/view/authentication/sign_up_view.dart';
 import 'package:pos/view_model/authentication_view_model/authentication_view_model.dart';
+import 'package:pos/view_model/bloc/loading_bloc/loading_bloc/loading_bloc.dart';
+import 'package:pos/view_model/bloc/loading_bloc/loading_bloc_state/loading_bloc_state.dart';
 
 class LoginView extends StatelessWidget {
   LoginView({super.key});
@@ -100,21 +103,24 @@ class LoginView extends StatelessWidget {
               ),
 
               /// sign in  button
-              AppTextButton(
-                title: "Log In",
-                textColor: AppColor.white,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                backgroundColor: AppColor.primaryColor,
-                width: 170,
-                height: 40,
-                borderRadius: 12,
-                onTap: () {
-                  if(_formKey.currentState!.validate()){
-                    _authenticationViewModel.signIn(context, emailController.text.toString(), passwordController.text.toString());
-                  }
-                },
-              ),
+              BlocBuilder<LoadingBloc , LoadingBlocState>(builder: (context , state) {
+                return AppTextButton(
+                  title: "Log In",
+                  textColor: AppColor.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  backgroundColor: AppColor.primaryColor,
+                  width: 170,
+                  height: 40,
+                  borderRadius: 12,
+                  isLoading: state.isLoading,
+                  onTap: () {
+                    if(_formKey.currentState!.validate()){
+                      _authenticationViewModel.signIn(context, emailController.text.toString(), passwordController.text.toString());
+                    }
+                  },
+                );
+              }),
 
               const Spacer(),
               Align(
