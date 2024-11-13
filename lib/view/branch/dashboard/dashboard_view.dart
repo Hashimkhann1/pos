@@ -26,7 +26,19 @@ class _DashboardViewState extends State<DashboardView> {
     final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Dashboard"),),
+      appBar: AppBar(
+        title: const Text("Dashboard"),
+        actions: [
+          ElevatedButton(
+            onPressed: (){},
+            child: Text("Opening Balance"),
+          ),
+          ElevatedButton(
+            onPressed: (){},
+            child: Text("Closing Balance"),
+          )
+        ],
+      ),
       drawer: const DrawerWidget(),
       body: Padding(
         padding: const EdgeInsets.only(left: 8.0,right: 8.0,top: 8.0),
@@ -37,77 +49,70 @@ class _DashboardViewState extends State<DashboardView> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 DashboardBox(
+                  title: "Opening Balance",
+                  subtitle: "0",
+                  icon: CupertinoIcons.chart_bar,
+                ),
+                DashboardBox(
                   title: "Cash Sale",
                   subtitle: "0",
                   icon: CupertinoIcons.money_dollar,
                 ),
                 DashboardBox(
-                  title: "Credit Sale",
+                  title: "Total Cash",
+                  subtitle: "0",
+                  icon: CupertinoIcons.arrow_right_circle,
+                ),
+                DashboardBox(
+                  title: "Expense",
                   subtitle: "0",
                   icon: CupertinoIcons.creditcard,
                 ),
                 DashboardBox(
-                  title: "Total Sale",
-                  subtitle: "0",
-                  icon: CupertinoIcons.chart_bar,
-                ),
-                DashboardBox(
-                  title: "Total Installment",
+                  title: "Profit & Loss",
                   subtitle: "0",
                   icon: CupertinoIcons.time,
-                ),
-                DashboardBox(
-                  title: "Supplier Payment",
-                  subtitle: "0",
-                  icon: CupertinoIcons.arrow_right_circle,
                 ),
               ],
             ),
 
             /// daily reports
-            Container(
-              width: width,
-              height: height * 0.2,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 30,
-                  itemBuilder: (context , index) {
-                return InkWell(
-                  onTap: (){
-                    setState(() {
-                      selectedSaleDateForHistory = index.toString();
-                    });
-                  },
-                  child: Container(
-                    width: 120,
-                    height: height * 0.2,
-                    margin: EdgeInsets.symmetric(horizontal: 4),
-                    padding: EdgeInsets.only(top: 6),
-                    decoration: BoxDecoration(
-                        color: selectedSaleDateForHistory.isNotEmpty && int.parse(selectedSaleDateForHistory) == index ? Colors.grey.withOpacity(0.4) : Colors.grey.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(4)
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Container(
+                width: width,
+                height: height * 0.3,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 30,
+                    itemBuilder: (context , index) {
+                  return InkWell(
+                    onTap: (){
+                      setState(() {
+                        selectedSaleDateForHistory = index.toString();
+                      });
+                    },
+                    child: Container(
+                      width: 100,
+                      height: height * 0.2,
+                      margin: EdgeInsets.symmetric(horizontal: 4),
+                      padding: EdgeInsets.only(top: 6),
+                      decoration: BoxDecoration(
+                          color: selectedSaleDateForHistory.isNotEmpty && int.parse(selectedSaleDateForHistory) == index ? Colors.grey.withOpacity(0.4) : Colors.grey.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(4)
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          MyText(title: "500000",fontSize: 16,fontWeight: FontWeight.w500,),
+                          Container(width: 14, height: height * 0.14,color: AppColor.primaryColor,),
+                          MyText(title: "13/11/2024",color: Colors.grey.withOpacity(0.8),),
+                        ],
+                      ),
                     ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-
-                        Column(
-                          children: [
-                            /// Total sale
-                            MyText(title: "500000",fontSize: 18,fontWeight: FontWeight.bold,),
-
-                            /// date
-                            MyText(title: "13/11/2024",color: Colors.grey.withOpacity(0.8),),
-                          ],
-                        ),
-
-                        Container(width: 14, height: height * 0.14,color: AppColor.primaryColor,)
-
-                      ],
-                    ),
-                  ),
-                );
-              }),
+                  );
+                }),
+              ),
             )
           ],
         ),

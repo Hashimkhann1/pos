@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:pos/component/drawer/drawer_widget.dart';
-import '../../../../component/app_text_field.dart';
-import '../../../../component/my_text.dart';
-import '../../../../res/color/app_color.dart';
+import '../../../component/app_text_field.dart';
+import '../../../component/my_text.dart';
+import '../../../res/color/app_color.dart';
 
-class AllProductsView extends StatefulWidget {
-  const AllProductsView({super.key});
+class SaleInvoiceView extends StatefulWidget {
+  SaleInvoiceView({super.key});
 
   @override
-  State<AllProductsView> createState() => _AllProductsViewState();
+  State<SaleInvoiceView> createState() => _SaleInvoiceViewState();
 }
 
-class _AllProductsViewState extends State<AllProductsView> {
+class _SaleInvoiceViewState extends State<SaleInvoiceView> {
   List<Product> addProduct = [];
-  final TextEditingController _searchController = TextEditingController();
+  TextEditingController _searchController = TextEditingController();
 
   // Filtered list of products
   List<Product> filteredProductList = List.from(mockProductList);
@@ -51,7 +51,7 @@ class _AllProductsViewState extends State<AllProductsView> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Sale Product"),
+        title: const Text("Sale Invoice"),
       ),
       drawer: const DrawerWidget(),
       body: Row(
@@ -163,7 +163,7 @@ class _AllProductsViewState extends State<AllProductsView> {
                                 },
                                 cells: [
                                   DataCell(MyText(title: "${index + 1}")),
-                                  DataCell(MyText(title: filteredProductList[index].productName)),
+                                  DataCell(MyText(title: "${filteredProductList[index].productName}")),
                                   DataCell(MyText(title: "${filteredProductList[index].quantity}")),
                                   DataCell(MyText(title: "${filteredProductList[index].price}")),
                                 ],
@@ -190,105 +190,168 @@ class _AllProductsViewState extends State<AllProductsView> {
               ),
             ),
           ),
-
           /// Selected product for sale view
-          Expanded(
-            flex: 3,
-            child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    height: 30,
-                    width: double.infinity,
-                    color: AppColor.primaryColor,
-                    child: const Center(child: Text("Cash Sale",style: TextStyle(color: AppColor.white,fontWeight: FontWeight.bold,fontSize: 14),)),
-                  ),
-                  const SizedBox(height: 10,),
-                  const AppTextField(hintText: "Search Item"),
-                  const SizedBox(height: 10,),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: DataTable(
-                        headingTextStyle: const TextStyle(color: AppColor.black, fontWeight: FontWeight.bold, fontSize: 14),
-                        headingRowHeight: 30,
-                        border: TableBorder.all(color: AppColor.grey.withOpacity(0.1)),
-                        columns: const [
-                          DataColumn(label: Text('Product')),
-                          DataColumn(label: Text('Description')),
-                          DataColumn(label: Text('Qty')),
-                          DataColumn(label: Text('Price')),
-                          DataColumn(label: Text('Discount')),
-                          DataColumn(label: Text('Tax')),
-                          DataColumn(label: Text('Total')),
-                          DataColumn(label: Text('Delete')),
-                        ],
-                        rows: List.generate(addProduct.length, (index) {
-                          var product = addProduct[index];
-                          return DataRow(
-                            cells: [
-                              DataCell(Text(product.productName)),
-                              DataCell(Text(product.description)),
-                              DataCell(Text(addProduct[index].quantity.toString())),
-                              DataCell(Text(product.price.toString())),
-                              DataCell(Text(product.discount.toString())),
-                              DataCell(Text(product.tax.toString())),
-                              DataCell(Text((product.price * product.quantity).toStringAsFixed(2))),
-                              DataCell(IconButton(
-                                icon: const Icon(Icons.delete),
-                                onPressed: () {
-                                  setState(() {
-                                    addProduct.removeAt(index);
-                                  });
-                                },
-                              )),
-                            ],
-                          );
-                        }),
-                      ),
+      Expanded(
+        flex: 3,
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: 30,
+                width: double.infinity,
+                color: AppColor.primaryColor,
+                child: Center(
+                  child: Text(
+                    "Cash Sale",
+                    style: TextStyle(
+                      color: AppColor.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        const Text("Total: ", style: TextStyle(fontSize: 16)),
-                        Text(
-                          addProduct.fold(0, (previousValue, product) {
-                            return previousValue + (product.price * product.quantity).toInt();
-                          }).toStringAsFixed(2),
-                          style: const TextStyle(color: Colors.green, fontSize: 16),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            // Hold Sale logic
-                          },
-                          child: const Text('Hold Sale'),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            // Payment logic
-                          },
-                          child: const Text('Payment'),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                ),
               ),
-            ),
+              SizedBox(height: 10),
+              AppTextField(hintText: "Search Item"),
+              SizedBox(height: 10),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: DataTable(
+                    headingTextStyle: TextStyle(
+                      color: AppColor.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
+                    headingRowHeight: 30,
+                    columnSpacing: 110,
+                    border: TableBorder.all(color: AppColor.grey.withOpacity(0.1)),
+                    columns: [
+                      DataColumn(label: Text('#')),
+                      DataColumn(label: Text('Product')),
+                      DataColumn(label: Text('Price')),
+                      DataColumn(label: Text('Quantity')),
+                      DataColumn(label: Text('Total')),
+                      DataColumn(label: Text('Delete')),
+                    ],
+                    rows: List.generate(addProduct.length, (index) {
+                      var product = addProduct[index];
+                      TextEditingController quantityController = TextEditingController(
+                        text: product.quantity.toString(),
+                      );
+
+                      return DataRow(
+                        cells: [
+                          DataCell(Text("${index + 1}")),
+                          DataCell(Text(product.productName)),
+                          DataCell(Text(product.price.toString())),
+                          DataCell(
+                            Row(
+                              children: [
+                                IconButton(
+                                  icon: Icon(Icons.remove),
+                                  onPressed: () {
+                                    setState(() {
+                                      if (product.quantity > 1) {
+                                        product.quantity -= 1; // Decrement by 1
+                                        quantityController.text = product.quantity.toString(); // Update TextField value
+                                      }
+                                    });
+                                  },
+                                ),
+                                SizedBox(
+                                  width: 50,
+                                  child: TextField(
+                                    controller: quantityController..text = product.quantity.toString(),
+                                    keyboardType: TextInputType.numberWithOptions(decimal: true),
+                                    onChanged: (value) {
+                                      setState(() {
+                                        product.quantity = double.tryParse(value)?.toString() != null ? double.parse(double.parse(value).toString()) : product.quantity;
+                                        quantityController.text = product.quantity.toString();
+                                        quantityController.selection = TextSelection.fromPosition(
+                                          TextPosition(offset: quantityController.text.length),
+                                        );
+                                      });
+                                    },
+                                    textAlign: TextAlign.center,
+                                    decoration: InputDecoration(
+                                      isDense: true,
+                                      contentPadding: EdgeInsets.symmetric(vertical: 8),
+                                    ),
+                                  ),
+                                ),
+
+
+                                IconButton(
+                                  icon: Icon(Icons.add),
+                                  onPressed: () {
+                                    setState(() {
+                                      product.quantity += 1; // Increment by 1
+                                      quantityController.text = product.quantity.toString(); // Update TextField value
+                                    });
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                          DataCell(Text((product.price * product.quantity).toStringAsFixed(2))),
+                          DataCell(
+                            IconButton(
+                              icon: Icon(Icons.delete),
+                              onPressed: () {
+                                setState(() {
+                                  addProduct.removeAt(index);
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      );
+                    }),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text("Total: ", style: TextStyle(fontSize: 16)),
+                    Text(
+                      addProduct.fold(0.0, (previousValue, product) {
+                        return previousValue + (product.price * product.quantity);
+                      }).toStringAsFixed(2),
+                      style: TextStyle(color: Colors.green, fontSize: 16),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+
+                      },
+                      child: Text('Hold Sale'),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        // Payment logic
+                      },
+                      child: Text('Payment'),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
+      ),
+      ],
       ),
     );
   }
@@ -299,7 +362,7 @@ class _AllProductsViewState extends State<AllProductsView> {
 class Product {
   String productName;
   String description;
-  int quantity;
+  double quantity;
   double price;
   double discount;
   double tax;
@@ -326,7 +389,7 @@ List<Product> mockProductList = [
     productName: 'Apple',
     description: 'Fresh and juicy apple',
     quantity: 10,
-    price: 120.0,
+    price: 120,
     discount: 1.0,
     tax: 0.5,
   ),
@@ -334,7 +397,7 @@ List<Product> mockProductList = [
     productName: 'Carrot',
     description: 'Organic and crunchy carrot',
     quantity: 15,
-    price: 150.0,
+    price: 150,
     discount: 0.5,
     tax: 0.2,
   ),
@@ -342,7 +405,7 @@ List<Product> mockProductList = [
     productName: 'Banana',
     description: 'Ripe and sweet banana',
     quantity: 12,
-    price: 200.0,
+    price: 200,
     discount: 0.7,
     tax: 0.3,
   ),
@@ -350,7 +413,7 @@ List<Product> mockProductList = [
     productName: 'Potato',
     description: 'Freshly harvested potato',
     quantity: 20,
-    price: 120.2,
+    price: 120,
     discount: 0.3,
     tax: 0.1,
   ),
@@ -358,7 +421,7 @@ List<Product> mockProductList = [
     productName: 'Orange',
     description: 'Citrusy and tangy orange',
     quantity: 18,
-    price: 140.5,
+    price: 140,
     discount: 0.8,
     tax: 0.4,
   ),
@@ -366,7 +429,7 @@ List<Product> mockProductList = [
     productName: 'Tomato',
     description: 'Juicy and ripe tomato',
     quantity: 25,
-    price: 110.8,
+    price: 110,
     discount: 0.6,
     tax: 0.3,
   ),
@@ -374,7 +437,7 @@ List<Product> mockProductList = [
     productName: 'Grapes',
     description: 'Sweet and succulent grapes',
     quantity: 14,
-    price: 250.5,
+    price: 250,
     discount: 1.0,
     tax: 0.5,
   ),
@@ -382,7 +445,7 @@ List<Product> mockProductList = [
     productName: 'Cucumber',
     description: 'Fresh and crunchy cucumber',
     quantity: 22,
-    price: 400.0,
+    price: 400,
     discount: 0.4,
     tax: 0.2,
   ),
@@ -390,7 +453,7 @@ List<Product> mockProductList = [
     productName: 'Pineapple',
     description: 'Tropical and sweet pineapple',
     quantity: 8,
-    price: 500.0,
+    price: 500,
     discount: 1.2,
     tax: 0.6,
   ),
@@ -398,7 +461,7 @@ List<Product> mockProductList = [
     productName: 'Spinach',
     description: 'Fresh and leafy spinach',
     quantity: 30,
-    price: 100.0,
+    price: 100,
     discount: 0.2,
     tax: 0.1,
   ),
@@ -406,7 +469,7 @@ List<Product> mockProductList = [
     productName: 'Peach',
     description: 'Juicy and fragrant peach',
     quantity: 10,
-    price: 300.0,
+    price: 300,
     discount: 0.9,
     tax: 0.4,
   ),
@@ -414,7 +477,7 @@ List<Product> mockProductList = [
     productName: 'Onion',
     description: 'Sharp and pungent onion',
     quantity: 17,
-    price: 100.1,
+    price: 100,
     discount: 0.3,
     tax: 0.2,
   ),
@@ -422,7 +485,7 @@ List<Product> mockProductList = [
     productName: 'Mango',
     description: 'Sweet and tropical mango',
     quantity: 9,
-    price: 300.5,
+    price: 300,
     discount: 1.0,
     tax: 0.5,
   ),
@@ -430,7 +493,7 @@ List<Product> mockProductList = [
     productName: 'Lettuce',
     description: 'Crisp and refreshing lettuce',
     quantity: 28,
-    price: 100.3,
+    price: 100,
     discount: 0.5,
     tax: 0.2,
   ),
@@ -438,7 +501,7 @@ List<Product> mockProductList = [
     productName: 'Strawberry',
     description: 'Fresh and juicy strawberry',
     quantity: 6,
-    price: 400.0,
+    price: 400,
     discount: 1.5,
     tax: 0.7,
   ),

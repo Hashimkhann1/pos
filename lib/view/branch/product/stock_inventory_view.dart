@@ -1,6 +1,3 @@
-
-
-
 import 'package:flutter/material.dart';
 
 import '../../../component/app_text_field.dart';
@@ -48,7 +45,7 @@ class _StockInventoryViewState extends State<StockInventoryView> {
                 4: FlexColumnWidth(2),
                 5: FlexColumnWidth(2),
                 6: FlexColumnWidth(2),
-                7: FlexColumnWidth(2),
+                7: FlexColumnWidth(1),
               },
               border: TableBorder.all(
                 color: Colors.grey.shade300,
@@ -62,11 +59,11 @@ class _StockInventoryViewState extends State<StockInventoryView> {
                     HeaderCustomTableCell(title: "#"),
                     HeaderCustomTableCell(title: "Barcode"),
                     HeaderCustomTableCell(title: "Product"),
-                    HeaderCustomTableCell(title: "Category"),
-                    HeaderCustomTableCell(title: "Company"),
                     HeaderCustomTableCell(title: "Purchase Price"),
                     HeaderCustomTableCell(title: "Sale Price"),
+                    HeaderCustomTableCell(title: "Category"),
                     HeaderCustomTableCell(title: "Quantity"),
+                    HeaderCustomTableCell(title: "Edit"),
                   ],
                 ),
               ],
@@ -84,7 +81,7 @@ class _StockInventoryViewState extends State<StockInventoryView> {
                       4: FlexColumnWidth(2),
                       5: FlexColumnWidth(2),
                       6: FlexColumnWidth(2),
-                      7: FlexColumnWidth(2),
+                      7: FlexColumnWidth(1),
                     },
                     border: TableBorder.all(
                       color: Colors.grey.shade300,
@@ -94,15 +91,66 @@ class _StockInventoryViewState extends State<StockInventoryView> {
                         decoration: BoxDecoration(
                           color: index.isOdd ? Colors.grey.shade100 : AppColor.white,
                         ),
-                        children: const [
-                          CustomTableCell(title: "#"),
-                          CustomTableCell(title: "Barcode"),
-                          CustomTableCell(title: "Product"),
-                          CustomTableCell(title: "Category"),
-                          CustomTableCell(title: "Company"),
-                          CustomTableCell(title: "Purchase Price"),
-                          CustomTableCell(title: "Sale Price"),
-                          CustomTableCell(title: "Stock"),
+                        children:  [
+                          const CustomTableCell(title: "#"),
+                          const CustomTableCell(title: "Barcode"),
+                          const CustomTableCell(title: "Product"),
+                          const CustomTableCell(title: "Category"),
+                          const CustomTableCell(title: "Purchase Price"),
+                          const CustomTableCell(title: "Sale Price"),
+                          const CustomTableCell(title: "Stock"),
+                          TableCell(
+                              child: IconButton(
+                                onPressed: (){
+                                  showDialog(
+                                    context: context,
+                                    builder: (context){
+                                      return AlertDialog(
+                                        title: Container(
+                                          height: 30,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(5),
+                                            color: AppColor.primaryColor,
+                                          ),
+                                          child: const Center(child: Text("Assign Stock")),
+                                        ),
+                                        content: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            AppTextField(
+                                              hintText: "Remainig Stock",
+                                            ),
+                                            SizedBox(height: 10,),
+                                            AppTextField(
+                                              hintText: "Assign Stock",
+                                            ),
+                                            SizedBox(height: 10,),
+                                            AppTextField(
+                                              hintText: "New Stock",
+                                            ),
+                                            SizedBox(height: 20,),
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                ElevatedButton(
+                                                  onPressed: (){},
+                                                  child: Text("Cancel"),
+                                                ),
+                                                ElevatedButton(
+                                                  onPressed: (){},
+                                                  child: Text("Save"),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                                icon: Icon(Icons.edit,size: 20,),
+                              )
+                          )
                         ],
                       ),
                     ],
@@ -130,76 +178,32 @@ class _StockInventoryViewState extends State<StockInventoryView> {
                 content: const Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Row(
-                      children: [
-                        AppTextField(
-                          hintText: "Barcode",
-                        ),
-                        SizedBox(width: 10,),
-                        AppTextField(
-                          hintText: "Product Name",
-                        ),
-                      ],
+                    AppTextField(
+                      hintText: "Barcode",
                     ),
                     SizedBox(height: 10,),
-                    Row(
-                      children: [
-                        AppTextField(
-                          hintText: "Purchase Price",
-                        ),
-                        SizedBox(width: 10,),
-                        AppTextField(
-                          hintText: "Sale Price",
-                        ),
-                      ],
+                    AppTextField(
+                      hintText: "Product Name",
                     ),
                     SizedBox(height: 10,),
-                    Row(
-                      children: [
-                        AppTextField(
-                          hintText: "Whole Sale",
-                        ),
-                        SizedBox(width: 10,),
-                        AppTextField(
-                          hintText: "Discount",
-                        ),
-                      ],
+                    AppTextField(
+                      hintText: "Purchase Price",
                     ),
                     SizedBox(height: 10,),
-                    Row(
-                      children: [
-                        AppTextField(
-                          hintText: "Tax",
-                        ),
-                        SizedBox(width: 10,),
-                        AppTextField(
-                          hintText: "Stock",
-                        ),
-                      ],
+                    AppTextField(
+                      hintText: "Sale Price",
                     ),
                     SizedBox(height: 10,),
-                    Row(
-                      children: [
-                        AppTextField(
-                          hintText: "Product Type",
-                        ),
-                        SizedBox(width: 10,),
-                        AppTextField(
-                          hintText: "Company",
-                        ),
-                      ],
+                    AppTextField(
+                      hintText: "Product Category",
                     ),
                     SizedBox(height: 10,),
-                    Row(
-                      children: [
-                        AppTextField(
-                          hintText: "Purchase Date",
-                        ),
-                        SizedBox(width: 10,),
-                        AppTextField(
-                          hintText: "Expiry Date",
-                        ),
-                      ],
+                    AppTextField(
+                      hintText: "Product Type",
+                    ),
+                    SizedBox(height: 10,),
+                    AppTextField(
+                      hintText: "Stock",
                     ),
                   ],
                 ),
