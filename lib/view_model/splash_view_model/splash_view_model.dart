@@ -1,11 +1,8 @@
-
-
-
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pos/view/authentication/login_view.dart';
-import 'package:pos/view/branch/sales_products_view/all_products_and_total_view/all_products_and_total_view.dart';
+
+import '../../view/branch/sale_invoice/sale_invoice_view.dart';
 
 class SplashViewModel {
 
@@ -15,7 +12,7 @@ class SplashViewModel {
 
     Future.delayed(Duration(seconds: 1), () {
       if(_auth.currentUser != null){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => AllProductsView()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => SaleInvoiceView()));
       }else{
         Navigator.push(context, MaterialPageRoute(builder: (context) => LoginView()));
       }

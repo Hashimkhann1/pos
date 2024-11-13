@@ -1,15 +1,10 @@
-
-
-
-
-
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:pos/view/authentication/login_view.dart';
-import 'package:pos/view/branch/sales_products_view/all_products_and_total_view/all_products_and_total_view.dart';
+
+import '../../view/branch/sale_invoice/sale_invoice_view.dart';
 
 
 class AuthenticationViewModel {
@@ -39,7 +34,7 @@ class AuthenticationViewModel {
     try{
       await _auth.signInWithEmailAndPassword(email: email, password: password).then((value) {
         // Utils.toastMessage("User Sign in successfully");
-        Navigator.push(context, MaterialPageRoute(builder: (context) => const AllProductsView()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => SaleInvoiceView()));
       });
     }on FirebaseAuthException catch(error){
       if(kDebugMode){
@@ -55,7 +50,7 @@ class AuthenticationViewModel {
         await addInitialStoreData(context , value.user!.uid.toString(), storeName , email );
         // Utils.toastMessage("User Sign up successfully");
         print("Sign Up");
-        Navigator.push(context, MaterialPageRoute(builder: (context) => const AllProductsView()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => SaleInvoiceView()));
       });
     }on FirebaseAuthException catch(error){
       // Utils.toastMessage(error.code);
