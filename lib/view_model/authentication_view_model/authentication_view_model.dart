@@ -3,12 +3,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pos/res/root/root.dart';
 import 'package:pos/view/authentication/login_view.dart';
 import 'package:pos/view_model/bloc/loading_bloc/loading_bloc/loading_bloc.dart';
 
 import '../../view/branch/sale_invoice/sale_invoice_view.dart';
 import '../bloc/loading_bloc/loading_bloc_event/loading_bloc_event.dart';
+import '../get_store_data_view_model/get_store_data_view_model.dart';
 
 
 class AuthenticationViewModel {
@@ -29,7 +29,7 @@ class AuthenticationViewModel {
       });
     }catch(error) {
       if(kDebugMode){
-        print("Error while adding initil User Data >>>>>>>>> $error");
+        print("Error while adding initial User Data >>>>>>>>> $error");
       }
     }
   }
@@ -41,6 +41,7 @@ class AuthenticationViewModel {
     try{
       await _auth.signInWithEmailAndPassword(email: email, password: password).then((value) {
         // Utils.toastMessage("User Sign in successfully");
+        GetStoreDataViewModel().getStoreData(context);
         context.read<LoadingBloc>().add(SetLoading());
         Navigator.push(context, MaterialPageRoute(builder: (context) => SaleInvoiceView()));
       });
