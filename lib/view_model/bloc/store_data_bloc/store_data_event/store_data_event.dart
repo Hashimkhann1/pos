@@ -13,8 +13,25 @@ class StoreDataEvent extends Equatable {
 
 }
 
-/// All Store data
+/// All Store data 
 class AllStoreData extends StoreDataEvent {
   final StoreDataModel storeDataModel;
   AllStoreData({required this.storeDataModel});
+}
+
+class GetALlCategory extends StoreDataEvent {
+  final List<String> categoriesList;
+  GetALlCategory({required this.categoriesList});
+}
+
+/// Add Category
+class AddCategory extends StoreDataEvent {
+  final String categoryName;
+  AddCategory({required this.categoryName});
+}
+
+/// Remove Category
+class RemoveCategory extends StoreDataEvent {
+  final String categoryName;
+  RemoveCategory({required this.categoryName});
 }
