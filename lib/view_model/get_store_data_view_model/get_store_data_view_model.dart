@@ -5,7 +5,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pos/model/store_data_model/store_data_model.dart';
+import 'package:pos/view_model/bloc/store_data_bloc/store_data_bloc/store_data_bloc.dart';
+import 'package:pos/view_model/bloc/store_data_bloc/store_data_event/store_data_event.dart';
 
 class GetStoreDataViewModel {
 
@@ -23,8 +26,8 @@ class GetStoreDataViewModel {
         // Adding data to model
         StoreDataModel storeData = await StoreDataModel.fromJson(data.data()!);
 
-
-        // context.read<UserDataBloc>().add(AddInitialUserData(userModel: userData));
+        context.read<StoreDataBloc>().add(AllStoreData(storeDataModel: storeData));
+        // context.read<StoreDataBloc>().add(GetALlCategory(categoriesList: storeData.productsCategory));
 
       }
     }catch(error){
