@@ -90,6 +90,7 @@ class CategoryView extends StatelessWidget {
                     onTap: () {
                       if(_formKey.currentState!.validate()){
                         AddCategoryViewModel().addCategory(context, categoryController.text.toString());
+                        categoryController.clear();
                       }
                     },
                   );
@@ -100,9 +101,8 @@ class CategoryView extends StatelessWidget {
 
                 /// all Categories
                 BlocBuilder<StoreDataBloc , StoreDataState>(builder: (context , state) {
-                  print("Build called >>>>");
-                  return state.storeData[0].productsCategory == null || state.storeData[0].productsCategory!.isEmpty ? MyText(title: "Category is not added yet!",fontSize: 20,color: AppColor.primaryColor,fontWeight: FontWeight.bold,) :  Wrap(
-                      children: List.generate(state.storeData[0].productsCategory!.length, (index) {
+                  return state.categoriesList.isEmpty ? MyText(title: "Category is not added yet!",fontSize: 20,color: AppColor.primaryColor,fontWeight: FontWeight.bold,) :  Wrap(
+                      children: List.generate(state.categoriesList.length, (index) {
                         return Container(
                           // width: MediaQuery.of(context).size.width * 0.09,
                           width: 190,
@@ -117,7 +117,7 @@ class CategoryView extends StatelessWidget {
                             children: [
                               //  created class number
                               MyText(
-                                title: state.storeData[0].productsCategory![index].toString(),
+                                title: state.categoriesList[index].toString(),
                                 overflow: TextOverflow.ellipsis,
                                 color: AppColor.white,
                                 fontSize: 14,
@@ -130,10 +130,10 @@ class CategoryView extends StatelessWidget {
                                 endIndent: 6,
                                 indent: 6,
                               ),
-                              // created class cancel icon
+                              // created category cancel icon
                               InkWell(
                                 onTap: () {
-                                  AddCategoryViewModel().removeCategory(context, state.storeData[0].productsCategory![index].toString());
+                                  AddCategoryViewModel().removeCategory(context, state.categoriesList[index].toString());
                                 },
                                 child: const Icon(
                                   Icons.cancel_outlined,
