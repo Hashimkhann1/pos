@@ -29,6 +29,7 @@ class GetStoreDataViewModel {
         // Get store Data
         context.read<StoreDataBloc>().add(AllStoreData(storeDataModel: storeData));
 
+        // converting list dynamic into list string
         List<String> categories = data.data()!['productsCategory'] == null ? [] : (data.data()!['productsCategory'] as List<dynamic>)
             .map((item) => item.toString())
             .toList();
