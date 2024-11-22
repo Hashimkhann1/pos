@@ -14,6 +14,7 @@ class StoreDataBloc extends Bloc<StoreDataEvent , StoreDataState> {
 
   StoreDataBloc() : super(StoreDataState()) {
     on<AllStoreData>(_allStoreData);
+    on<GetALlCategory>(_getALlCategory);
     on<AddCategory>(_addCategory);
     on<RemoveCategory>(_removeCategory);
   }
@@ -23,25 +24,22 @@ class StoreDataBloc extends Bloc<StoreDataEvent , StoreDataState> {
     emit(state.copyWith(storeData: List.from(storeData)));
   }
 
-  void _getALlCategory() {
-
+  /// Get All Category
+  void _getALlCategory(GetALlCategory event , Emitter emit){
+    allCategories = event.categoriesList;
+    emit(state.copyWith(categoriesList: List.from(allCategories)));
   }
 
   /// add category
   void _addCategory(AddCategory event, Emitter<StoreDataState> emit) {
-
-    allCategories = state.storeData[0].productsCategory!;
-    storeData[0].productsCategory = allCategories;
-
-    // i will work on it tomorrow
-
-    emit(state.copyWith(storeData: List.from(storeData))); // This should trigger rebuilds
+    allCategories.add(event.categoryName.toString());
+    emit(state.copyWith(categoriesList: List.from(allCategories)));
   }
 
   /// remove category
   void _removeCategory(RemoveCategory event, Emitter<StoreDataState> emit) {
-    storeData[0].productsCategory!.remove(event.categoryName);
-    emit(state.copyWith(storeData: List.from(storeData))); // This should trigger rebuilds
+    allCategories.remove(event.categoryName);
+    emit(state.copyWith(categoriesList: List.from(allCategories))); // This should trigger rebuilds
   }
 
 
