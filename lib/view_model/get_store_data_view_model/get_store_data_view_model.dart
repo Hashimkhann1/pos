@@ -26,11 +26,19 @@ class GetStoreDataViewModel {
         // Adding data to model
         StoreDataModel storeData = await StoreDataModel.fromJson(data.data()!);
 
+        // Get store Data
         context.read<StoreDataBloc>().add(AllStoreData(storeDataModel: storeData));
-        // context.read<StoreDataBloc>().add(GetALlCategory(categoriesList: storeData.productsCategory));
+
+        List<String> categories = data.data()!['productsCategory'] == null ? [] : (data.data()!['productsCategory'] as List<dynamic>)
+            .map((item) => item.toString())
+            .toList();
+
+        // Get All Category
+        context.read<StoreDataBloc>().add(GetALlCategory(categoriesList: categories));
 
       }
     }catch(error){
+      print(error);
       if(kDebugMode){
         print("Error while getting user data from GetUserDataViewModel >>>>>>> $error");
       }
