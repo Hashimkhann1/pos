@@ -10,3 +10,4 @@
 - Report Ui is almost completed
 - Working on UI
 - Firebase is added
+- Add and remove category si completed
