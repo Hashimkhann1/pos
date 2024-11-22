@@ -25,11 +25,10 @@ class AddCategoryViewModel {
       await _firestore.doc(_auth.currentUser!.uid.toString()).update({
         'productsCategory': FieldValue.arrayUnion([categoryName.toString()])
       }).then((value) {
+
         context.read<LoadingBloc>().add(SetLoading());
         context.read<StoreDataBloc>().add(AddCategory(categoryName: categoryName));
-        if(kDebugMode){
-          print("Category is added >>>>>>>>>>> :)");
-        }
+
       });
     }catch(error){
       context.read<LoadingBloc>().add(SetLoading());
@@ -45,9 +44,7 @@ class AddCategoryViewModel {
       await _firestore.doc(_auth.currentUser!.uid.toString()).update({
         'productsCategory': FieldValue.arrayRemove([categoryName.toString()])
       }).then((value) {
-        if(kDebugMode){
-          print("Category is removed >>>>>>>>>>> :)");
-        }
+        context.read<StoreDataBloc>().add(RemoveCategory(categoryName: categoryName));
       });
     }catch(error){
       if(kDebugMode){
